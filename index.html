@@ -34,18 +34,16 @@
 
       <div class="corner top-left">
         <span class="hero-name">Alan Ohep</span>
-        <span class="hero-role" data-en="Editor of Commercial, Branded &amp; Film" data-es="Editor de Comercial, Branded y Film">Editor of Commercial, Branded &amp; Film</span>
       </div>
 
       <div class="corner top-right">
-        <a href="#works" data-en="Work" data-es="Trabajo">Work</a>
+        <a href="#commercial" data-en="Commercial" data-es="Comercial">Commercial</a>
         <a href="#film">Film</a>
-        <a href="reel.html" data-en="Reel" data-es="Reel">Reel</a>
-        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
         <button class="lang-toggle" id="langToggle">ES</button>
       </div>
 
       <div class="corner bottom-left">
+        <div class="now-playing" id="nowPlaying" hidden>♪ <span id="nowPlayingTitle"></span></div>
         <a href="reel.html" data-en="Watch Reel →" data-es="Ver Reel →">Watch Reel →</a>
       </div>
 
@@ -115,118 +113,127 @@
   <!-- WORK LIST -->
   <section id="works">
     <div class="container">
-      <div class="table-header">
-        <span data-en="Client" data-es="Cliente">Client</span>
+      <div class="table-header three-col">
+        <span data-en="Project" data-es="Proyecto">Project</span>
         <span data-en="Category" data-es="Categoría">Category</span>
+        <span data-en="Credit" data-es="Crédito">Credit</span>
       </div>
       <div class="work-table">
 
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915758929" target="_blank" class="work-row">
-          <span class="client">Ulla Johnson</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row three-col" id="film" data-thumb="images/yo-y-las-bestias.jpg">
+          <span class="client">Yo y las Bestias <span class="year">2022</span></span>
+          <span class="cat" data-en="Film" data-es="Cine">Film</span>
+          <span class="cat credit" data-en="Production &amp; Edit" data-es="Producción y Edición">Production &amp; Edit</span>
         </a>
-        <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="work-row" data-thumb="images/ralph-lauren.jpg">
-          <span class="client">Ralph Lauren</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row three-col" data-thumb="images/buscando-un-burro.jpg">
+          <span class="client">Buscando un Burro <span class="year">2025</span></span>
+          <span class="cat" data-en="Film" data-es="Cine">Film</span>
+          <span class="cat credit" data-en="Co-Edit, Trailer Edit" data-es="Co-Edición, Edición del Tráiler">Co-Edit, Trailer Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row">
-          <span class="client">Lacoste</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row three-col">
+          <span class="client">Film Independent Spirit Awards</span>
+          <span class="cat" data-en="Film" data-es="Cine">Film</span>
+          <span class="cat credit" data-en="Creative Direction &amp; Co-Edit" data-es="Dirección Creativa y Co-Edición">Creative Direction &amp; Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915762552" target="_blank" class="work-row">
-          <span class="client">V Magazine</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
-        </a>
-        <a href="https://vimeo.com/1061439642" target="_blank" class="work-row" data-thumb="images/bershka.jpg">
-          <span class="client">Bershka</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
-        </a>
-        <a href="https://vimeo.com/1050198358" target="_blank" class="work-row" data-thumb="images/lab-series.jpg">
-          <span class="client">Lab Series</span>
-          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
-        </a>
-        <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="work-row" data-thumb="images/dior.jpg">
-          <span class="client">Dior</span>
-          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
-        </a>
-        <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="work-row" data-thumb="images/laura-mercier.jpg">
-          <span class="client">Laura Mercier</span>
-          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
-        </a>
-        <a href="https://vimeo.com/1061439642" target="_blank" class="work-row" data-thumb="images/caudalie.jpg">
-          <span class="client">Caudalie</span>
-          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
-        </a>
-        <a href="https://vimeo.com/1050197105" target="_blank" class="work-row" data-thumb="images/fresh.jpg">
-          <span class="client">Fresh</span>
-          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
-        </a>
-        <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="work-row" data-thumb="images/effy-jewelry.jpg">
-          <span class="client">Effy Jewelry</span>
-          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
-        </a>
-        <a href="https://vimeo.com/762718720/5bb795bd5f" target="_blank" class="work-row">
-          <span class="client">Theory</span>
-          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
-        </a>
-        <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="work-row" data-thumb="images/dicks-philly.jpg">
-          <span class="client">Dick's Sporting Goods — Philadelphia</span>
-          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
-        </a>
-        <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="work-row" data-thumb="images/dicks-alaska.jpg">
-          <span class="client">Dick's Sporting Goods — Alaska</span>
-          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
-        </a>
-        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row" data-thumb="images/hart-island.jpg">
-          <span class="client">Hart Island</span>
-          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
-        </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col" id="commercial">
           <span class="client">JD Sports</span>
           <span class="cat" data-en="Sports" data-es="Deportes">Sports</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col">
           <span class="client">Birkenstock</span>
           <span class="cat" data-en="Sports" data-es="Deportes">Sports</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
         </a>
-        <a href="https://vimeo.com/970118627" target="_blank" class="work-row" data-thumb="images/citizen-watches.jpg">
+        <a href="https://vimeo.com/970118627" target="_blank" class="work-row three-col" data-thumb="images/citizen-watches.jpg">
           <span class="client">Citizen Watches</span>
           <span class="cat" data-en="Sports" data-es="Deportes">Sports</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="work-row" data-thumb="images/electrolit.jpg">
+        <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="work-row three-col" data-thumb="images/electrolit.jpg">
           <span class="client">Electrolit</span>
           <span class="cat" data-en="Sports" data-es="Deportes">Sports</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FILM LIST -->
-  <section id="film">
-    <div class="container">
-      <div class="table-header">
-        <span>Film</span>
-        <span data-en="Role" data-es="Rol">Role</span>
-      </div>
-      <div class="work-table">
-
-
-        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row" data-thumb="images/yo-y-las-bestias.jpg">
-          <span class="client">Yo y las Bestias <span class="year">2022</span></span>
-          <span class="cat" data-en="Producer &amp; Editor" data-es="Productor y Editor">Producer &amp; Editor</span>
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915758929" target="_blank" class="work-row three-col">
+          <span class="client">Ulla Johnson</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
         </a>
-        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row" data-thumb="images/buscando-un-burro.jpg">
-          <span class="client">Buscando un Burro <span class="year">2025</span></span>
-          <span class="cat" data-en="Co-Editor, Trailer Edit" data-es="Co-Editor, Edición del Trailer">Co-Editor, Trailer Edit</span>
+        <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="work-row three-col" data-thumb="images/ralph-lauren.jpg">
+          <span class="client">Ralph Lauren</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row">
-          <span class="client">Film Independent Spirit Awards</span>
-          <span class="cat" data-en="Conceptual" data-es="Conceptual">Conceptual</span>
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col">
+          <span class="client">Lacoste</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915759068" target="_blank" class="work-row">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915762552" target="_blank" class="work-row three-col">
+          <span class="client">V Magazine</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
+        </a>
+        <a href="https://vimeo.com/1061439642" target="_blank" class="work-row three-col" data-thumb="images/bershka.jpg">
+          <span class="client">Bershka</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
+        </a>
+        <a href="https://vimeo.com/1050198358" target="_blank" class="work-row three-col" data-thumb="images/lab-series.jpg">
+          <span class="client">Lab Series</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/915759068" target="_blank" class="work-row three-col">
           <span class="client">Vogue: Film Trailer 80's</span>
-          <span class="cat" data-en="Conceptual" data-es="Conceptual">Conceptual</span>
+          <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
+        </a>
+        <a href="https://vimeo.com/762718720/5bb795bd5f" target="_blank" class="work-row three-col">
+          <span class="client">Theory</span>
+          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="work-row three-col" data-thumb="images/dicks-philly.jpg">
+          <span class="client">Dick's Sporting Goods — Philadelphia</span>
+          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="work-row three-col" data-thumb="images/dicks-alaska.jpg">
+          <span class="client">Dick's Sporting Goods — Alaska</span>
+          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row three-col" data-thumb="images/hart-island.jpg">
+          <span class="client">Hart Island</span>
+          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="work-row three-col" data-thumb="images/dior.jpg">
+          <span class="client">Dior</span>
+          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
+        </a>
+        <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="work-row three-col" data-thumb="images/laura-mercier.jpg">
+          <span class="client">Laura Mercier</span>
+          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1061439642" target="_blank" class="work-row three-col" data-thumb="images/caudalie.jpg">
+          <span class="client">Caudalie</span>
+          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1050197105" target="_blank" class="work-row three-col" data-thumb="images/fresh.jpg">
+          <span class="client">Fresh</span>
+          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="work-row three-col" data-thumb="images/effy-jewelry.jpg">
+          <span class="client">Effy Jewelry</span>
+          <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
 
       </div>
@@ -271,8 +278,11 @@
     </div>
   </div>
 
+  <!-- Spotify player: kept off-screen; the song name is shown in the hero's bottom-left corner -->
+  <div id="spotify-host" aria-hidden="true"></div>
+
   <!-- Hover preview -->
-  <div id="thumb-preview"><img /></div>
+  <div id="thumb-preview"><img alt="" /><video muted playsinline loop preload="none"></video></div>
 
   <script src="script.js"></script>
 </body>
