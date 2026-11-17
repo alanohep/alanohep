@@ -91,6 +91,82 @@ if (touchRows.length) {
   document.addEventListener('touchend',   () => { touchHideTimer = setTimeout(() => setTouchedRow(null), 700); }, { passive: true });
 }
 
+// Split hero: FILM (left half) / COMMERCIAL (right half)
+// Only one side shows at a time, full screen. Visitors land on a random side; it switches
+// when the cursor crosses the middle of the screen, or with a horizontal swipe on phones.
+// The project list highlights the rows of the side being shown. Clicking the hero (or
+// "Watch Reel") opens that side's reel over the page.
+const heroMain   = document.querySelector('.hero-main');
+const heroSides  = { film: document.querySelector('.hero-side[data-side="film"]'),
+                     commercial: document.querySelector('.hero-side[data-side="commercial"]') };
+const reelSrc    = { film: 'videos/film-reel.mp4', commercial: 'videos/commercial-reel.mp4' };
+let side = null;
+
+document.querySelectorAll('.work-row').forEach(row => {
+  if (row.children[1] && row.children[1].dataset.en === 'Film') row.classList.add('is-film');
+});
+
+function setSide(next) {
+  if (next === side) return;
+  side = next;
+  document.body.dataset.side = side;
+  for (const [name, el] of Object.entries(heroSides)) {
+    const video = el.querySelector('video');
+    el.classList.toggle('active', name === side);
+    if (name === side) video.play().catch(() => {}); // muted, so autoplay is allowed
+    else setTimeout(() => { if (side !== name) video.pause(); }, 450); // after the fade
+  }
+}
+setSide(Math.random() < 0.5 ? 'film' : 'commercial');
+
+heroMain.addEventListener('mousemove', e => setSide(e.clientX < window.innerWidth / 2 ? 'film' : 'commercial'));
+
+// Top menu: Commercial / Film also switch the hero side (and still scroll to the list)
+document.querySelector('.corner.top-right a[href="#film"]').addEventListener('click', () => setSide('film'));
+document.querySelector('.corner.top-right a[href="#commercial"]').addEventListener('click', () => setSide('commercial'));
+
+// Phones: horizontal swipe on the hero switches side (finger to the left = the right side comes in)
+let heroTouch = null;
+heroMain.addEventListener('touchstart', e => { const t = e.touches[0]; heroTouch = { x: t.clientX, y: t.clientY }; }, { passive: true });
+heroMain.addEventListener('touchend', e => {
+  if (!heroTouch) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - heroTouch.x, dy = t.clientY - heroTouch.y;
+  heroTouch = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    heroMain.dataset.swiped = '1'; // so a click that may follow doesn't open the reel
+    setTimeout(() => delete heroMain.dataset.swiped, 400);
+    setSide(dx < 0 ? 'commercial' : 'film');
+  }
+}, { passive: true });
+
+// Reel player
+const reelOverlay = document.getElementById('reelOverlay');
+const reelPlayer  = document.getElementById('reelPlayer');
+
+function openReel() {
+  reelPlayer.src = reelSrc[side];
+  reelOverlay.classList.add('open');
+  reelOverlay.setAttribute('aria-hidden', 'false');
+  reelPlayer.currentTime = 0;
+  reelPlayer.play().catch(() => {});
+}
+function closeReel() {
+  reelOverlay.classList.remove('open');
+  reelOverlay.setAttribute('aria-hidden', 'true');
+  reelPlayer.pause();
+}
+
+heroMain.addEventListener('click', e => {
+  if (heroMain.dataset.swiped) { delete heroMain.dataset.swiped; return; }
+  if (e.target.closest('a, button')) return; // menu, language, music, etc.
+  openReel();
+});
+document.getElementById('watchReel').addEventListener('click', e => { e.preventDefault(); openReel(); });
+document.getElementById('reelClose').addEventListener('click', closeReel);
+reelOverlay.addEventListener('click', e => { if (e.target === reelOverlay) closeReel(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && reelOverlay.classList.contains('open')) closeReel(); });
+
 // Language toggle
 let lang = 'en';
 const langToggle = document.getElementById('langToggle');

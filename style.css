@@ -39,6 +39,16 @@ a { color: inherit; text-decoration: none; }
   min-height: 0;
 }
 
+/* Split hero: both sides are stacked full screen; the active one fades in */
+.hero-main { cursor: pointer; }
+.hero-side {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.hero-side.active { opacity: 1; }
+
 .hero-featured {
   position: absolute;
   inset: 0;
@@ -545,6 +555,44 @@ body.splash-open { overflow: hidden; }
 .splash-enter:hover,
 .splash-enter:focus-visible { background: #f5c400; color: #0a0a0a; outline: 3px solid #0a0a0a; outline-offset: -3px; }
 
+/* ─── SPLIT HERO: project list highlight ─── */
+/* The whole list stays; rows from the side not being shown fade back */
+.work-row { transition: opacity 0.4s ease; }
+body[data-side="film"] .work-row:not(.is-film),
+body[data-side="commercial"] .work-row.is-film { opacity: 0.28; }
+body[data-side] .work-row:hover { opacity: 1; }
+
+/* ─── REEL PLAYER ─── */
+.reel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+.reel-overlay.open { opacity: 1; visibility: visible; }
+.reel-overlay video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.reel-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 1;
+  background: none;
+  border: none;
+  color: rgba(240,237,232,0.75);
+  font-family: var(--font);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.reel-close:hover { color: var(--text); }
+
 /* ─── PHONE ─── */
 @media (max-width: 640px) {
   .container { padding: 0 1.25rem; }
@@ -562,6 +610,8 @@ body.splash-open { overflow: hidden; }
   .corner.bottom-right a { font-size: 0.9rem; }
   .now-playing { font-size: 0.7rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
+  .hero-main { touch-action: pan-y; } /* vertical scroll stays native; horizontal swipes switch side */
+  .reel-close { top: 1rem; right: 1rem; }
   body::before { height: 5.5rem; }
 
   /* Sliding strip: smaller tiles */

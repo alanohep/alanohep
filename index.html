@@ -36,7 +36,16 @@
 
     <!-- Featured image -->
     <div class="hero-main">
-      <img class="hero-featured" src="images/header.jpg" alt="Alan Ohep — Editor" />
+      <!-- Split hero: FILM on the left half of the screen, COMMERCIAL on the right. Only one
+           shows at a time, full screen; it switches when the cursor crosses the middle (or with a
+           swipe on phones). Visitors land on a random side. Clicking opens that side's reel.
+           Until the reels are in videos/, the poster stills show instead. -->
+      <div class="hero-side" data-side="film">
+        <video class="hero-featured" src="videos/film-reel.mp4" poster="images/header.jpg" muted loop playsinline preload="auto"></video>
+      </div>
+      <div class="hero-side" data-side="commercial">
+        <video class="hero-featured" src="videos/commercial-reel.mp4" poster="images/commercial-placeholder.jpg" muted loop playsinline preload="auto"></video>
+      </div>
       <div class="hero-veil"></div>
 
       <div class="corner top-left">
@@ -57,7 +66,7 @@
       </div>
 
       <div class="corner bottom-left">
-        <a href="reel.html" data-en="Watch Reel →" data-es="Ver Reel →">Watch Reel →</a>
+        <a href="reel.html" id="watchReel" data-en="Watch Reel →" data-es="Ver Reel →">Watch Reel →</a>
       </div>
 
       <div class="corner bottom-right">
@@ -295,6 +304,12 @@
 
   <!-- Background music (tracks are listed in script.js) -->
   <audio id="bgMusic" preload="auto"></audio>
+
+  <!-- Reel player (opens over the page with the reel of the side being shown) -->
+  <div class="reel-overlay" id="reelOverlay" aria-hidden="true">
+    <button class="reel-close" id="reelClose" aria-label="Close">✕</button>
+    <video id="reelPlayer" playsinline controls></video>
+  </div>
 
   <!-- Hover preview -->
   <div id="thumb-preview"><img alt="" /><video muted playsinline loop preload="none"></video></div>
