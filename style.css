@@ -151,6 +151,17 @@ a { color: inherit; text-decoration: none; }
 
 .strip-info-col a:hover { color: var(--text); }
 
+/* Links inside a sentence (e.g. Caffeine): subtle underline so they read as links */
+.strip-info-col p a {
+  font-size: inherit;
+  color: rgba(240,237,232,0.7);
+  text-decoration: underline;
+  text-decoration-color: rgba(240,237,232,0.3);
+  text-underline-offset: 2px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.strip-info-col p a:hover { color: var(--text); text-decoration-color: var(--text); }
+
 .strip-info-about { align-items: flex-end; text-align: right; }
 .strip-info-about a {
   font-size: 0.75rem;
