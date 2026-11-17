@@ -298,6 +298,12 @@ const SITE_TRACKS = [
   { src: 'music/caraballeda.m4a',        en: 'Caraballeda - Yo y Las Bestias',          mark: '¶' },
 ].map(t => ({ ...t, es: t.en })); // song names are the same in both languages
 
+// Each visit plays the site's songs in a new random order, so it doesn't always open with the same one
+for (let i = SITE_TRACKS.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [SITE_TRACKS[i], SITE_TRACKS[j]] = [SITE_TRACKS[j], SITE_TRACKS[i]];
+}
+
 const music           = document.getElementById('bgMusic');
 const nowPlayingTitle = document.getElementById('nowPlayingTitle');
 const nowPlayingMark  = document.getElementById('nowPlayingMark');

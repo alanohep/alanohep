@@ -660,6 +660,12 @@ body[data-side] .work-row:hover { opacity: 1; }
 }
 .reel-close:hover { color: var(--text); }
 
+/* Computers switch side with the cursor, so the Film / Commercial menu links are phone-only (tabs) */
+@media (min-width: 641px) {
+  .corner.top-right a[href="#film"],
+  .corner.top-right a[href="#commercial"] { display: none; }
+}
+
 /* ─── PHONE ─── */
 @media (max-width: 640px) {
   .container { padding: 0 1.25rem; }
