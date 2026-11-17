@@ -113,13 +113,18 @@ document.querySelectorAll('.work-row').forEach(row => {
 });
 
 // Carousel under the hero: shows only the projects of the side being shown (built from the
-// project list), repeated so the loop always fills the screen. A picked subgenre enlarges its stills.
+// project list), repeated so the loop always fills the screen. While a subgenre is showing in
+// the hero (or after one is clicked), it shows only that subgenre's projects.
+let stripKey = '';
 function buildStrip() {
   const track = document.querySelector('.strip-track');
   if (!track) return;
+  const g = genre || document.body.dataset.genre || '';
   const rows = [...document.querySelectorAll('.work-row[data-thumb]')]
-    .filter(r => r.classList.contains('is-film') === (side === 'film'));
-  if (!rows.length) return;
+    .filter(r => r.classList.contains('is-film') === (side === 'film'))
+    .filter(r => !g || r.dataset.genre === g);
+  if (!rows.length || stripKey === side + g) return;
+  stripKey = side + g;
   const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb}" alt="" /></a>`;
   let set = rows.map(item).join('');
   let count = rows.length;
@@ -131,9 +136,9 @@ function buildStrip() {
 function setSide(next) {
   if (next === side) return;
   side = next;
-  buildStrip();
-  setGenre(null);
   delete document.body.dataset.genre; // a picked subgenre belongs to the other side
+  setGenre(null);
+  buildStrip();
   document.body.dataset.side = side;
   for (const [name, el] of Object.entries(heroSides)) {
     const video = el.querySelector('video');
@@ -179,12 +184,13 @@ window.addEventListener('resize', placeGenreLabels);
 // Fetch the subgenre stills shortly after the page loads (computers only), so they show instantly
 window.addEventListener('load', () => {
   if (isPhone.matches) return;
-  setTimeout(() => document.querySelectorAll('.genre-stills img').forEach(img => { if (!img.src) img.src = img.dataset.src; }), 1500);
+  document.querySelectorAll('.genre-stills img').forEach(img => { if (!img.src) img.src = img.dataset.src; });
 });
 
 function setGenre(next) {
   if (next === genre) return;
   genre = next;
+  buildStrip();
   for (const el of document.querySelectorAll('.genre-stills img, .genre-labels span')) {
     const on = !!next && el.dataset.genre === next;
     if (on && el.tagName === 'IMG' && !el.src) el.src = el.dataset.src; // load stills only when first needed
@@ -252,6 +258,7 @@ heroMain.addEventListener('click', e => {
   if (genre) {
     // A subgenre is showing: go down to the list with only its projects highlighted
     document.body.dataset.genre = genre;
+    buildStrip();
     document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
     return;
   }
@@ -320,11 +327,17 @@ function showTrack() {
   nowPlayingMark.textContent = t.mark;
 }
 
+// While the visitor plays the entry game, quietly download the site's first song, so it
+// starts the instant they enter (the others load while it plays)
+let firstSiteSong = null;
+fetch(SITE_TRACKS[0].src).then(r => r.ok ? r.blob() : null).then(b => { if (b) firstSiteSong = URL.createObjectURL(b); }).catch(() => {});
+
 // Called by snake.js when the visitor enters the site: switch to the site's songs and play them
 window.startSiteMusic = () => {
   if (playlist === SITE_TRACKS) return;
   playlist = SITE_TRACKS;
   loadTrack(0);
+  if (firstSiteSong) music.src = firstSiteSong;
   music.play().catch(() => {});
 };
 
