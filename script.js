@@ -125,13 +125,13 @@ function buildStrip() {
     .filter(r => g ? r.dataset.genre === g : r.hasAttribute('data-top')); // top picks (data-top) unless a subgenre is chosen
   if (!rows.length || stripKey === side + g) return;
   stripKey = side + g;
-  const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb}" alt="" /></a>`;
+  const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb.replace('images/', 'images/large/')}" alt="" loading="lazy" /></a>`;
   let set = rows.map(item).join('');
   let count = rows.length;
   const itemW = document.querySelector('.strip-item') ? document.querySelector('.strip-item').offsetWidth + 2 : 362;
   while (count * itemW < window.innerWidth + 400) { set += rows.map(item).join(''); count += rows.length; }
   track.innerHTML = set + set; // two copies: the animation slides by half for a seamless loop
-  track.style.animationDuration = count * 3.7 + 's';
+  track.style.animationDuration = count * 7 + 's';
 }
 
 function setSide(next) {
