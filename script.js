@@ -65,147 +65,45 @@ langToggle.addEventListener('click', () => {
   });
 });
 
-// Spotify — background music
-// The playlist starts when the page finishes loading and plays non-stop, looping from the top.
-// Clicking anywhere on the page pauses it; clicking again resumes. If the browser blocks
-// autoplay with sound, it starts with the visitor's first click instead.
-// The current song is shown in the hero's bottom-left corner.
-const SPOTIFY_PLAYLIST_ID = '0igatRylColKXp1IIfDh21'; // Dream Haze
-
-// Track list of the playlist [track id, song, artist], in playlist order.
-// If the playlist changes on Spotify, this list needs to be refreshed.
-const SPOTIFY_TRACKS = [
-  ["6ibiAgBvPvnAZsMr6e32IH", "Strangers", "Ruby Haunt"],
-  ["0il7LJ828XyPqyvNx9cF5S", "You got time and I got money", "Smerz"],
-  ["5BSFEeAykpOz160uZK4fcW", "Falling", "Acopia"],
-  ["6ajfyxyUZ3dECuKi04vaR3", "Idle I'm - Colorama Coloured In Remix", "John Stammers, Colorama Coloured In, Colorama Coloured In Remix"],
-  ["2LKOHdMsL0K9KwcPRlJK2v", "After Dark", "Mr.Kitty"],
-  ["1e4kwCOOIv8OHBHSd3avgQ", "Baby", "Ariel Pink, DāM-FunK"],
-  ["3NWTeiwILojiH2OM9IRVZb", "18 Years", "The Black Angels"],
-  ["5wYsTtdq2c7ljXp4bIpfmH", "hi", "NEW YORK, Lolina"],
-  ["6nzy9w5eKLZGz0UqO41fC5", "Another Day", "Human Tetris"],
-  ["46ZLeoYZ4abozAWMqTB1TE", "El Jardín", "The Black Angels"],
-  ["1FFmiaCi4Md97ANkP0U1zc", "grand theft auto", "sabrina palau"],
-  ["1mh9zmkXOzqSVt8Gnc79RI", "perfect storm", "spirit blue"],
-  ["7oFMyxHighYVebgKkyQ2G1", "Sunken", "Scratch Massive"],
-  ["6vYoqwpLLtvfeRTo3gweoN", "It's Lovely, Come On In", "thredd"],
-  ["74SUn8w4lYSwgOGPvVZiEo", "Gallowdance", "Lebanon Hanover"],
-  ["4LRw4FEgsWAZ87EagBVQWd", "Dream Story", "Laura Groves"],
-  ["4T1oZ3UAFKbraSp5JAISWW", "Monolith", "Twin Tribes"],
-  ["11sfRkHdvsop5DdHVmGpt1", "Ring of Past", "Men I Trust"],
-  ["5DKhWB2CyjHceyV75MdaF0", "Coffin", "pavlos"],
-  ["0qnE2zGsoGm0GaWEYvMUUi", "Little Ghost", "Provoker"],
-  ["7vvultYHYCuFk0AJWa5c9O", "Phantom", "Vestron Vulture"],
-  ["61vULySTwSy8nXlrSU8j9Q", "Prisoner of Love", "Provoker"],
-  ["2tpfPi4qSamU9EX5Q8FnNi", "Pain", "Boy Harsher"],
-  ["7k04YZDaHaoMjOGKhcIFKc", "You Make Me Wanna Die", "Farah"],
-  ["7KT3QK1mTErOIeXyBwsnA8", "Flinch Awake", "Provoker"],
-  ["4qa6mMggRQGmiCXsGXkyJL", "céilí", "Mermaid Chunky"],
-  ["2ndh30vZhrfL0Zpq8wRbvl", "You Could Have It", "Horse Vision"],
-  ["5dF0HUts7TRFgYKRpXborR", "How Are We", "Horse Vision"],
-  ["2O2TWBdW6bHRpNqOV9UpBa", "Clouds", "Maria Chiara Argirò"],
-  ["0U0ldCRmgCqhVvD6ksG63j", "Nightcall", "Kavinsky"],
-  ["068kLruVinypNfFPEujjSK", "September Again", "Nation of Language"],
-  ["47tgNw681YONTIyoAS2Ski", "Come to the Fore - C Duncan Remix", "Fellini Félin, C Duncan"]
+// Background music
+// Plays the tracks below in order and loops back to the first when the last one ends.
+// It tries to start as soon as the page loads; browsers usually block sound until the
+// visitor interacts, so in that case it starts with the first click. After that, every
+// click anywhere on the page pauses / resumes. The current track name is shown in the
+// hero's bottom-left corner.
+const MUSIC_TRACKS = [
+  { src: 'music/pt1.m4a', title: 'Part 1' },
+  { src: 'music/pt2.m4a', title: 'Part 2' },
+  { src: 'music/pt3.m4a', title: 'Part 3' },
+  { src: 'music/pt4.m4a', title: 'Part 4' },
+  { src: 'music/pt5.m4a', title: 'Part 5' },
 ];
 
-const nowPlaying      = document.getElementById('nowPlaying');
+const music           = document.getElementById('bgMusic');
 const nowPlayingTitle = document.getElementById('nowPlayingTitle');
-
-let spotifyController = null;
-let wantPlay = true;   // play as soon as the player is ready
-let isPlaying = false;
 let trackIndex = 0;
-let lastDuration = 0;
-let lastPosition = 0;
-let nearTrackEnd = false;
-let restartTimer = null;
 
-function showTrack(index) {
-  const t = SPOTIFY_TRACKS[index];
-  if (!t) return;
+function loadTrack(index) {
+  trackIndex = index % MUSIC_TRACKS.length;
+  music.src = MUSIC_TRACKS[trackIndex].src;
+}
+
+function showTrack() {
   // Replace the "Click to play" hint; drop its translations so the language toggle doesn't bring it back
   nowPlayingTitle.removeAttribute('data-en');
   nowPlayingTitle.removeAttribute('data-es');
-  nowPlayingTitle.textContent = `${t[1]} — ${t[2]}`;
-  nowPlaying.hidden = false;
+  nowPlayingTitle.textContent = MUSIC_TRACKS[trackIndex].title;
 }
 
-// Figure out which song is playing: by its id when the player reports it,
-// otherwise by counting track changes from the top of the playlist.
-function updateTrack({ playingURI, duration, position }) {
-  const id = String(playingURI || '').startsWith('spotify:track:') ? playingURI.split(':')[2] : null;
-  const byId = id ? SPOTIFY_TRACKS.findIndex(t => t[0] === id) : -1;
-  if (byId >= 0) {
-    trackIndex = byId;
-  } else if (lastDuration && (duration !== lastDuration || position < lastPosition - 5000)) {
-    trackIndex = (trackIndex + 1) % SPOTIFY_TRACKS.length;
-  }
-  lastDuration = duration;
-  lastPosition = position;
-  showTrack(trackIndex);
-}
+music.addEventListener('playing', showTrack);
+music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().catch(() => {}); });
 
-function startPlayback() {
-  wantPlay = true;
-  spotifyController.play();
-  // If the player wasn't ready to take the command yet, try once more
-  setTimeout(() => { if (wantPlay && !isPlaying) spotifyController.play(); }, 1500);
-}
-
-// Loop: the player has no repeat option, so detect the end of the playlist ourselves —
-// a track reached its last seconds, playback stopped, and no next track started.
-function restartPlaylist() {
-  restartTimer = null;
-  nearTrackEnd = false;
-  trackIndex = 0;
-  lastDuration = 0;
-  wantPlay = true;
-  spotifyController.loadUri(`spotify:playlist:${SPOTIFY_PLAYLIST_ID}`);
-}
-
-function onPlaybackUpdate(e) {
-  const { isPaused, position, duration } = e.data;
-  isPlaying = !isPaused;
-  if (isPlaying) {
-    wantPlay = false;
-    clearTimeout(restartTimer);
-    restartTimer = null;
-    nearTrackEnd = duration > 0 && duration - position < 3000;
-    if (duration > 0) updateTrack(e.data);
-  } else if (nearTrackEnd && !restartTimer && wantPlay === false && !pausedByClick) {
-    restartTimer = setTimeout(restartPlaylist, 2500);
-  }
-}
-
-let pausedByClick = false;
-
-// Any click on the page pauses / resumes the music
+// Any click / tap on the page pauses or resumes the music
 document.addEventListener('pointerdown', () => {
-  if (!spotifyController) return;
-  if (isPlaying) {
-    pausedByClick = true;
-    clearTimeout(restartTimer);
-    restartTimer = null;
-    spotifyController.pause();
-  } else {
-    pausedByClick = false;
-    startPlayback();
-  }
+  if (music.paused) music.play().catch(() => {});
+  else music.pause();
 }, true);
 
-window.addEventListener('load', () => {
-  window.onSpotifyIframeApiReady = IFrameAPI => {
-    const host = document.createElement('div');
-    document.getElementById('spotify-host').appendChild(host);
-    IFrameAPI.createController(host, { uri: `spotify:playlist:${SPOTIFY_PLAYLIST_ID}`, width: 300, height: 80 }, controller => {
-      spotifyController = controller;
-      controller.addListener('ready', () => { if (wantPlay) startPlayback(); });
-      controller.addListener('playback_update', onPlaybackUpdate);
-    });
-  };
-  const script = document.createElement('script');
-  script.src = 'https://open.spotify.com/embed/iframe-api/v1';
-  script.async = true;
-  document.body.appendChild(script);
-});
+loadTrack(0);
+// Try to start right away; if the browser blocks it, the first click starts it instead
+music.play().catch(() => {});

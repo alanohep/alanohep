@@ -1,0 +1,4 @@
+# Original audio masters (the site uses the compressed .m4a versions)
+music/*.wav
+.DS_Store
+.idea/
