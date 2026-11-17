@@ -163,16 +163,23 @@ a { color: inherit; text-decoration: none; }
   gap: 0.35rem;
 }
 
-/* The song line stays in place while scrolling (everything else in the header scrolls away) */
-.music-line {
+/* Name, Lead Editor, Commercial / Film and ES follow the visitor while scrolling */
+.corner.top-left,
+.corner.top-right {
   position: fixed;
-  left: 2.5rem;
-  top: 5.4rem; /* script.js sets the exact spot, right under "Lead Editor" */
   z-index: 50;
 }
 
-/* Dark fade behind the fixed song line once the page scrolls past the hero,
-   so it stays readable over the project list */
+/* The song line stays up in the hero (it scrolls away with the page) */
+.music-line {
+  position: absolute;
+  left: 2.5rem;
+  top: 5.4rem; /* script.js sets the exact spot, right under "Lead Editor" */
+  z-index: 10;
+}
+
+/* Dark fade behind the fixed corners once the page scrolls past the hero,
+   so they stay readable over the project list */
 body::before {
   content: '';
   position: fixed;

@@ -143,11 +143,12 @@ music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().
 
 loadTrack(0);
 
-// The song line stays fixed on screen; line it up right under "Lead Editor"
+// The song line stays in the hero (the name above it is fixed); line it up right under "Lead Editor"
 const musicLine = document.getElementById('musicLine');
 const heroRole  = document.querySelector('.hero-role');
 function placeMusicLine() {
-  musicLine.style.top = heroRole.getBoundingClientRect().bottom + window.scrollY + 5 + 'px';
+  // "Lead Editor" is fixed, so its position on screen is the same as at the top of the hero
+  musicLine.style.top = heroRole.getBoundingClientRect().bottom + 5 + 'px';
 }
 placeMusicLine();
 window.addEventListener('resize', placeMusicLine);
