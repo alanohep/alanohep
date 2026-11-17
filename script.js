@@ -112,16 +112,14 @@ updateScrolled();
 
 // Background music
 // Plays the tracks below in order and loops back to the first when the last one ends.
-// It tries to start as soon as the page loads; browsers usually block sound until the
-// visitor interacts, so in that case it starts with the first click. After that, every
-// click anywhere on the page pauses / resumes. The current track name is shown in the
-// hero's bottom-left corner.
+// It starts with the snake game on the entry screen (snake.js) and stops when the visitor
+// enters the site; the song line under the name in the top-left corner plays / pauses it.
 const MUSIC_TRACKS = [
-  { src: 'music/pt1.m4a', title: 'Part 1' },
-  { src: 'music/pt2.m4a', title: 'Part 2' },
-  { src: 'music/pt3.m4a', title: 'Part 3' },
-  { src: 'music/pt4.m4a', title: 'Part 4' },
-  { src: 'music/pt5.m4a', title: 'Part 5' },
+  { src: 'music/pt1.m4a', title: 'Fallen Waves - Soundtrack Part 1' },
+  { src: 'music/pt2.m4a', title: 'Fallen Waves - Soundtrack Part 2' },
+  { src: 'music/pt3.m4a', title: 'Fallen Waves - Soundtrack Part 3' },
+  { src: 'music/pt4.m4a', title: 'Fallen Waves - Soundtrack Part 4' },
+  { src: 'music/pt5.m4a', title: 'Fallen Waves - Soundtrack Part 5' },
 ];
 
 const music           = document.getElementById('bgMusic');
@@ -134,7 +132,7 @@ function loadTrack(index) {
 }
 
 function showTrack() {
-  // Replace the "Click to play" hint; drop its translations so the language toggle doesn't bring it back
+  // Replace the "Play music" hint; drop its translations so the language toggle doesn't bring it back
   nowPlayingTitle.removeAttribute('data-en');
   nowPlayingTitle.removeAttribute('data-es');
   nowPlayingTitle.textContent = MUSIC_TRACKS[trackIndex].title;
@@ -145,10 +143,12 @@ music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().
 
 loadTrack(0);
 
-// After entering (see snake.js for the entry game), any click / tap on the page pauses or
-// resumes the music. ('click' rather than 'pointerdown', so swiping to scroll doesn't toggle it)
-document.addEventListener('click', () => {
-  if (document.body.classList.contains('splash-open')) return;
+// The song line in the top-left corner is the play / pause button
+const nowPlayingBtn  = document.getElementById('nowPlaying');
+const nowPlayingIcon = document.getElementById('nowPlayingIcon');
+nowPlayingBtn.addEventListener('click', () => {
   if (music.paused) music.play().catch(() => {});
   else music.pause();
-}, true);
+});
+music.addEventListener('play',  () => { nowPlayingIcon.textContent = '❚❚'; });
+music.addEventListener('pause', () => { nowPlayingIcon.textContent = '▶'; });

@@ -471,6 +471,14 @@ footer {
 }
 
 .now-playing {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font);
+  font-weight: 300;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
   font-size: 0.75rem;
   color: rgba(240,237,232,0.55);
   white-space: nowrap;
@@ -480,6 +488,8 @@ footer {
 }
 
 .now-playing[hidden] { display: none; }
+.now-playing:hover { color: var(--text); }
+#nowPlayingIcon { display: inline-block; min-width: 1.1em; font-size: 0.85em; }
 
 /* ─── EXTRA CREDITS (below the footer) ─── */
 .extra-credits {
@@ -489,14 +499,14 @@ footer {
 }
 
 /* ─── ENTRY SCREEN ─── */
-/* Full-screen retro LCD with the snake game (drawn by snake.js) */
+/* Full-screen yellow-and-black retro screen with the snake game (drawn by snake.js) */
 body.splash-open { overflow: hidden; }
 
 .splash {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: #b7c47a;
+  background: #f5c400;
   touch-action: none;
   transition: opacity 0.8s ease, visibility 0.8s;
 }
@@ -514,9 +524,9 @@ body.splash-open { overflow: hidden; }
    (snake.js sizes and positions it over the blocked cells) */
 .splash-enter {
   position: absolute;
-  background: #26301a;
+  background: #0a0a0a;
   border: none;
-  color: #b7c47a;
+  color: #f5c400;
   font-family: 'VT323', monospace;
   letter-spacing: 0.15em;
   line-height: 1;
@@ -525,7 +535,7 @@ body.splash-open { overflow: hidden; }
   transition: background 0.2s, color 0.2s;
 }
 .splash-enter:hover,
-.splash-enter:focus-visible { background: #b7c47a; color: #26301a; outline: 3px solid #26301a; outline-offset: -3px; }
+.splash-enter:focus-visible { background: #f5c400; color: #0a0a0a; outline: 3px solid #0a0a0a; outline-offset: -3px; }
 
 /* ─── PHONE ─── */
 @media (max-width: 640px) {
@@ -541,7 +551,7 @@ body.splash-open { overflow: hidden; }
   .corner.top-right a,
   .corner.bottom-left a,
   .corner.bottom-right a { font-size: 0.9rem; }
-  .now-playing { font-size: 0.7rem; max-width: 45vw; }
+  .now-playing { font-size: 0.7rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
   body::before { height: 5.5rem; }
 
