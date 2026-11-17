@@ -221,6 +221,18 @@ body.scrolled::before { opacity: 1; }
   color: var(--text);
 }
 
+.hero-role {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: rgba(240,237,232,0.6);
+}
+.hero-role .sep {
+  margin: 0 0.6em;
+  color: rgba(240,237,232,0.35);
+}
+
 .corner.top-right a,
 .corner.bottom-left a,
 .corner.bottom-right a {
@@ -603,6 +615,7 @@ body[data-side] .work-row:hover { opacity: 1; }
   .corner.bottom-left  { bottom: 1.25rem; left: 1.25rem; }
   .corner.bottom-right { bottom: 1.25rem; right: 1.25rem; }
   .hero-name { font-size: 1rem; }
+  .hero-role { font-size: 0.7rem; letter-spacing: 0.1em; }
   .corner.top-right a,
   .corner.bottom-left a,
   .corner.bottom-right a { font-size: 0.9rem; }
