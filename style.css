@@ -456,6 +456,9 @@ footer {
 
 #thumb-preview [hidden] { display: none; }
 
+/* Phone-only tiny still (see PHONE section) */
+.row-thumb { display: none; }
+
 /* ─── BACKGROUND MUSIC ─── */
 .corner.bottom-left {
   display: flex;
@@ -519,9 +522,23 @@ footer {
     row-gap: 0.3rem;
     padding: 1rem 0;
   }
-  .work-row.three-col > .client { grid-column: 1 / -1; font-size: 1rem; }
+  .work-row.three-col > .client { grid-column: 1 / -1; font-size: 0.85rem; line-height: 1.5; align-items: center; }
+  .work-row.three-col > .client .year { font-size: 0.65rem; }
   .work-row.three-col > :nth-child(2),
-  .work-row.three-col > :nth-child(3) { font-size: 0.75rem; text-align: left; }
+  .work-row.three-col > :nth-child(3) { font-size: 0.65rem; text-align: left; }
+
+  /* Tiny still that pops up next to the project name under the finger */
+  .row-thumb {
+    display: block;
+    height: 1.5em;          /* same height as the name line, so the row doesn't grow */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 2px;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .work-row.touching .row-thumb.ready { opacity: 1; transform: none; }
   .work-row.three-col > :nth-child(2)::after { content: ' ·'; }
   #thumb-preview { display: none; }
 

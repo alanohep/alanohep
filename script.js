@@ -54,6 +54,43 @@ document.addEventListener('mousemove', e => {
   preview.style.top  = top + 'px';
 });
 
+// Phone: while a finger is on the project list, show a tiny still next to the
+// name of the project under it. The still is only loaded the first time it's needed.
+const touchRows = document.querySelectorAll('.work-row[data-thumb]');
+let touchedRow = null;
+let touchHideTimer = null;
+
+function setTouchedRow(row) {
+  if (row === touchedRow) return;
+  if (touchedRow) touchedRow.classList.remove('touching');
+  touchedRow = row;
+  if (!row) return;
+  let img = row.querySelector('.row-thumb');
+  if (!img) {
+    img = document.createElement('img');
+    img.className = 'row-thumb';
+    img.alt = '';
+    img.decoding = 'async';
+    img.addEventListener('load', () => img.classList.add('ready'));
+    img.src = row.dataset.thumb;
+    row.querySelector('.client').appendChild(img);
+  }
+  row.classList.add('touching');
+}
+
+function rowUnderFinger(e) {
+  const t = e.touches[0];
+  const el = t && document.elementFromPoint(t.clientX, t.clientY);
+  const row = el && el.closest('.work-row');
+  return row && row.dataset.thumb ? row : null;
+}
+
+if (touchRows.length) {
+  document.addEventListener('touchstart', e => { clearTimeout(touchHideTimer); setTouchedRow(rowUnderFinger(e)); }, { passive: true });
+  document.addEventListener('touchmove',  e => setTouchedRow(rowUnderFinger(e)), { passive: true });
+  document.addEventListener('touchend',   () => { touchHideTimer = setTimeout(() => setTouchedRow(null), 700); }, { passive: true });
+}
+
 // Language toggle
 let lang = 'en';
 const langToggle = document.getElementById('langToggle');
