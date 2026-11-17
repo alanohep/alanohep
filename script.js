@@ -106,8 +106,9 @@ function showTrack() {
 music.addEventListener('playing', showTrack);
 music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().catch(() => {}); });
 
-// Any click / tap on the page pauses or resumes the music
-document.addEventListener('pointerdown', () => {
+// Any click / tap on the page pauses or resumes the music.
+// ('click' rather than 'pointerdown', so swiping to scroll on a phone doesn't toggle it)
+document.addEventListener('click', () => {
   if (music.paused) music.play().catch(() => {});
   else music.pause();
 }, true);
