@@ -494,6 +494,7 @@ footer {
 
 /* Anchor targets inside the unified project list (clear the fixed top bar) */
 #film, #commercial { scroll-margin-top: 6rem; }
+#works { scroll-margin-top: 3rem; }
 
 #thumb-preview [hidden] { display: none; }
 

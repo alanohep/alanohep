@@ -159,6 +159,12 @@ function placeGenreLabels() {
 placeGenreLabels();
 window.addEventListener('resize', placeGenreLabels);
 
+// Fetch the subgenre stills shortly after the page loads (computers only), so they show instantly
+window.addEventListener('load', () => {
+  if (isPhone.matches) return;
+  setTimeout(() => document.querySelectorAll('.genre-stills img').forEach(img => { if (!img.src) img.src = img.dataset.src; }), 1500);
+});
+
 function setGenre(next) {
   if (next === genre) return;
   genre = next;
