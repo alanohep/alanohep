@@ -143,13 +143,28 @@ function showTrack() {
 music.addEventListener('playing', showTrack);
 music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().catch(() => {}); });
 
-// Any click / tap on the page pauses or resumes the music.
+loadTrack(0);
+
+// Entry screen: clicking "Enter" (or anywhere on it) starts the music and reveals the site
+const splash = document.getElementById('splash');
+let splashOpen = true;
+
+function enterSite() {
+  if (!splashOpen) return;
+  splashOpen = false;
+  music.play().catch(() => {});
+  splash.classList.add('hidden');
+  document.body.classList.remove('splash-open');
+  setTimeout(() => splash.remove(), 900);
+}
+
+splash.addEventListener('click', enterSite);
+document.getElementById('splashEnter').focus({ preventScroll: true });
+
+// After entering, any click / tap on the page pauses or resumes the music.
 // ('click' rather than 'pointerdown', so swiping to scroll on a phone doesn't toggle it)
 document.addEventListener('click', () => {
+  if (splashOpen) return;
   if (music.paused) music.play().catch(() => {});
   else music.pause();
 }, true);
-
-loadTrack(0);
-// Try to start right away; if the browser blocks it, the first click starts it instead
-music.play().catch(() => {});

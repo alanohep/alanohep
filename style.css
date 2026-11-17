@@ -494,6 +494,75 @@ footer {
   color: var(--muted);
 }
 
+/* ─── ENTRY SCREEN ─── */
+body.splash-open { overflow: hidden; }
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgba(8,8,8,0.78), rgba(8,8,8,0.9)),
+    url('images/header.jpg') center / cover no-repeat,
+    var(--bg);
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: splashIn 1.2s ease both;
+}
+
+@keyframes splashIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.splash-name {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 400;
+  color: var(--text);
+}
+
+.splash-role {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: rgba(240,237,232,0.6);
+}
+
+.splash-enter {
+  margin-top: 2.5rem;
+  background: none;
+  border: 1px solid rgba(240,237,232,0.4);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.8rem 2.2rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.splash-enter:hover,
+.splash-enter:focus-visible { background: var(--text); color: var(--bg); border-color: var(--text); outline: none; }
+
+.splash-note {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: rgba(240,237,232,0.4);
+}
+
 /* ─── PHONE ─── */
 @media (max-width: 640px) {
   .container { padding: 0 1.25rem; }

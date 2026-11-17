@@ -22,7 +22,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="splash-open">
+
+  <!-- Entry screen: browsers only allow sound after a click, so the music starts on "Enter" -->
+  <div class="splash" id="splash">
+    <div class="splash-inner">
+      <span class="splash-name">Alan Ohep</span>
+      <span class="splash-role">Lead Editor</span>
+      <button class="splash-enter" id="splashEnter">Enter</button>
+      <span class="splash-note">♪ Sound on</span>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
