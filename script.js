@@ -112,9 +112,26 @@ document.querySelectorAll('.work-row').forEach(row => {
   else if (COMMERCIAL_GENRES[cat]) row.dataset.genre = COMMERCIAL_GENRES[cat];
 });
 
+// Carousel under the hero: shows only the projects of the side being shown (built from the
+// project list), repeated so the loop always fills the screen. A picked subgenre enlarges its stills.
+function buildStrip() {
+  const track = document.querySelector('.strip-track');
+  if (!track) return;
+  const rows = [...document.querySelectorAll('.work-row[data-thumb]')]
+    .filter(r => r.classList.contains('is-film') === (side === 'film'));
+  if (!rows.length) return;
+  const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb}" alt="" /></a>`;
+  let set = rows.map(item).join('');
+  let count = rows.length;
+  while (count * 242 < window.innerWidth + 300) { set += rows.map(item).join(''); count += rows.length; }
+  track.innerHTML = set + set; // two copies: the animation slides by half for a seamless loop
+  track.style.animationDuration = count * 3.7 + 's';
+}
+
 function setSide(next) {
   if (next === side) return;
   side = next;
+  buildStrip();
   setGenre(null);
   delete document.body.dataset.genre; // a picked subgenre belongs to the other side
   document.body.dataset.side = side;

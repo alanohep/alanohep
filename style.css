@@ -630,6 +630,17 @@ body[data-genre="fashion"]     .work-row[data-genre="fashion"],
 body[data-genre="beauty"]      .work-row[data-genre="beauty"],
 body[data-genre="branded"]     .work-row[data-genre="branded"] { opacity: 1; }
 
+/* Carousel: the picked subgenre's stills grow a little, the rest dim */
+.strip-item { transition: width 0.4s ease, opacity 0.4s ease; }
+body[data-genre] .strip-item { opacity: 0.45; }
+body[data-genre="fiction"] .strip-item[data-genre="fiction"],
+body[data-genre="documentary"] .strip-item[data-genre="documentary"],
+body[data-genre="trailer"] .strip-item[data-genre="trailer"],
+body[data-genre="sports"] .strip-item[data-genre="sports"],
+body[data-genre="fashion"] .strip-item[data-genre="fashion"],
+body[data-genre="beauty"] .strip-item[data-genre="beauty"],
+body[data-genre="branded"] .strip-item[data-genre="branded"] { width: 300px; opacity: 1; }
+
 /* ─── SPLIT HERO: project list highlight ─── */
 /* The whole list stays; rows from the side not being shown fade back */
 .work-row { transition: opacity 0.4s ease; }
