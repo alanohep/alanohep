@@ -259,12 +259,13 @@ music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().
 
 loadTrack(0);
 
-// The song line stays in the hero (the name above it is fixed); line it up right under "Lead Editor"
+// The song line stays in the hero (the menu above it is fixed); line it up right under
+// Film / Commercial / ES in the top-right corner
 const musicLine = document.getElementById('musicLine');
-const heroRole  = document.querySelector('.hero-role');
+const topMenu   = document.querySelector('.corner.top-right');
 function placeMusicLine() {
-  // "Lead Editor" is fixed, so its position on screen is the same as at the top of the hero
-  musicLine.style.top = heroRole.getBoundingClientRect().bottom + 5 + 'px';
+  // The menu is fixed, so its position on screen is the same as at the top of the hero
+  musicLine.style.top = topMenu.getBoundingClientRect().bottom + 8 + 'px';
 }
 placeMusicLine();
 window.addEventListener('resize', placeMusicLine);

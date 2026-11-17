@@ -183,8 +183,8 @@ a { color: inherit; text-decoration: none; }
 /* The song line stays up in the hero (it scrolls away with the page) */
 .music-line {
   position: absolute;
-  left: 2.5rem;
-  top: 5.4rem; /* script.js sets the exact spot, right under "Lead Editor" */
+  right: 2.5rem;
+  top: 4rem; /* script.js sets the exact spot, right under Film / Commercial / ES */
   z-index: 10;
 }
 
@@ -502,10 +502,10 @@ footer {
   padding: 0;
   font-family: var(--font);
   font-weight: 300;
-  text-align: left;
+  text-align: right;
   cursor: pointer;
   transition: color 0.2s;
-  font-size: 0.75rem;
+  font-size: 0.67rem;
   color: rgba(240,237,232,0.55);
   white-space: nowrap;
   overflow: hidden;
@@ -610,7 +610,7 @@ body[data-side] .work-row:hover { opacity: 1; }
 
   /* Hero corners: tighter to the edges */
   .corner.top-left     { top: 1.25rem; left: 1.25rem; }
-  .music-line          { left: 1.25rem; }
+  .music-line          { right: 1.25rem; }
   .corner.top-right    { top: 1.25rem; right: 1.25rem; gap: 1.1rem; }
   .corner.bottom-left  { bottom: 1.25rem; left: 1.25rem; }
   .corner.bottom-right { bottom: 1.25rem; right: 1.25rem; }
@@ -619,7 +619,7 @@ body[data-side] .work-row:hover { opacity: 1; }
   .corner.top-right a,
   .corner.bottom-left a,
   .corner.bottom-right a { font-size: 0.9rem; }
-  .now-playing { font-size: 0.7rem; max-width: calc(100vw - 2.5rem); }
+  .now-playing { font-size: 0.62rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
   .hero-main { touch-action: pan-y; }
 
