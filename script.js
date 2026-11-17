@@ -65,6 +65,14 @@ langToggle.addEventListener('click', () => {
   });
 });
 
+// Fade in a dark band behind the fixed top corners once we scroll past the hero image
+function updateScrolled() {
+  document.body.classList.toggle('scrolled', window.scrollY > window.innerHeight - 160);
+}
+window.addEventListener('scroll', updateScrolled, { passive: true });
+window.addEventListener('resize', updateScrolled);
+updateScrolled();
+
 // Background music
 // Plays the tracks below in order and loops back to the first when the last one ends.
 // It tries to start as soon as the page loads; browsers usually block sound until the
