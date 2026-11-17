@@ -577,6 +577,58 @@ body.splash-open { overflow: hidden; }
 .splash-enter:hover,
 .splash-enter:focus-visible { background: #f5c400; color: #0a0a0a; outline: 3px solid #0a0a0a; outline-offset: -3px; }
 
+/* ─── SPLIT HERO: subgenres ─── */
+/* As the cursor moves down a side, that side's subgenre at the cursor's height emerges in
+   big type and its still replaces the reel behind it (script.js picks it). Computers only. */
+.hero-side { z-index: 0; }
+.genre-stills img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.genre-stills img.active { opacity: 1; }
+
+.genre-labels {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  pointer-events: none;
+}
+.hero-side[data-side="film"] .genre-labels { left: 0; }
+.hero-side[data-side="commercial"] .genre-labels { right: 0; }
+
+.genre-labels span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.55);
+  transform: translateY(calc(-50% + 14px));
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.45s ease;
+}
+.genre-labels span.active { opacity: 1; transform: translateY(-50%); }
+
+/* After clicking a subgenre, the list highlights only its projects */
+body[data-genre] .work-row { opacity: 0.28; }
+body[data-genre="fiction"]     .work-row[data-genre="fiction"],
+body[data-genre="documentary"] .work-row[data-genre="documentary"],
+body[data-genre="trailer"]     .work-row[data-genre="trailer"],
+body[data-genre="sports"]      .work-row[data-genre="sports"],
+body[data-genre="fashion"]     .work-row[data-genre="fashion"],
+body[data-genre="beauty"]      .work-row[data-genre="beauty"],
+body[data-genre="branded"]     .work-row[data-genre="branded"] { opacity: 1; }
+
 /* ─── SPLIT HERO: project list highlight ─── */
 /* The whole list stays; rows from the side not being shown fade back */
 .work-row { transition: opacity 0.4s ease; }
@@ -633,6 +685,7 @@ body[data-side] .work-row:hover { opacity: 1; }
   .now-playing { font-size: 0.62rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
   .hero-main { touch-action: pan-y; }
+  .genre-labels, .genre-stills { display: none; } /* no cursor on phones */
 
   /* Film / Commercial work as tabs: the active one is lit and underlined */
   .corner.top-right a[href="#film"],

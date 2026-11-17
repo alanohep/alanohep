@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20261117155731" />
+  <link rel="stylesheet" href="style.css?v=20261117160330" />
 </head>
 <body class="splash-open">
 
@@ -44,9 +44,31 @@
            On phones there's no split: Film / Commercial in the top menu work as tabs. -->
       <div class="hero-side" data-side="film">
         <video class="hero-featured" src="videos/film-reel-bg.mp4" poster="images/film-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <div class="genre-stills">
+          <img data-genre="fiction" data-src="images/genres/fiction.jpg" alt="" />
+          <img data-genre="documentary" data-src="images/genres/documentary.jpg" alt="" />
+          <img data-genre="trailer" data-src="images/genres/trailer.jpg" alt="" />
+        </div>
+        <div class="genre-labels">
+          <span data-genre="fiction" data-en="Fiction" data-es="Ficción">Fiction</span>
+          <span data-genre="documentary" data-en="Documentary" data-es="Documental">Documentary</span>
+          <span data-genre="trailer" data-en="Trailer &amp; Promotion" data-es="Tráiler y Promoción">Trailer &amp; Promotion</span>
+        </div>
       </div>
       <div class="hero-side" data-side="commercial">
         <video class="hero-featured" src="videos/commercial-reel-bg.mp4" poster="images/commercial-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <div class="genre-stills">
+          <img data-genre="sports" data-src="images/genres/sports.jpg" alt="" />
+          <img data-genre="fashion" data-src="images/genres/fashion.jpg" alt="" />
+          <img data-genre="beauty" data-src="images/genres/beauty.jpg" alt="" />
+          <img data-genre="branded" data-src="images/genres/branded.jpg" alt="" />
+        </div>
+        <div class="genre-labels">
+          <span data-genre="sports" data-en="Sports" data-es="Deportes">Sports</span>
+          <span data-genre="fashion" data-en="Fashion" data-es="Moda">Fashion</span>
+          <span data-genre="beauty" data-en="Beauty" data-es="Belleza">Beauty</span>
+          <span data-genre="branded" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
+        </div>
       </div>
       <div class="hero-veil"></div>
 
@@ -144,20 +166,25 @@
       </div>
       <div class="work-table">
 
-        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row three-col" id="film" data-thumb="images/yo-y-las-bestias.jpg">
+        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row three-col" id="film" data-thumb="images/yo-y-las-bestias.jpg" data-genre="fiction">
           <span class="client">Yo y las Bestias</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Production &amp; Edit" data-es="Producción y Edición">Production &amp; Edit</span>
         </a>
-        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row three-col" data-thumb="images/buscando-un-burro.jpg">
+        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row three-col" data-thumb="images/buscando-un-burro.jpg" data-genre="documentary">
           <span class="client">Buscando un Burro</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Co-Edit, Trailer Edit" data-es="Co-Edición, Edición del Tráiler">Co-Edit, Trailer Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row three-col" data-thumb="images/spirit-awards.jpg">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row three-col" data-thumb="images/spirit-awards.jpg" data-genre="trailer">
           <span class="client">Film Independent Spirit Awards</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Creative Direction &amp; Co-Edit" data-es="Dirección Creativa y Co-Edición">Creative Direction &amp; Co-Edit</span>
+        </a>
+        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row three-col" data-genre="documentary" data-thumb="images/hart-island.jpg">
+          <span class="client">Hart Island</span>
+          <span class="cat" data-en="Film" data-es="Cine">Film</span>
+          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
         <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col" id="commercial" data-thumb="images/jd-sports.jpg">
           <span class="client">JD Sports</span>
@@ -226,11 +253,6 @@
         </a>
         <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="work-row three-col" data-thumb="images/dicks-alaska.jpg">
           <span class="client">Dick's Sporting Goods — Alaska</span>
-          <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
-          <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
-        </a>
-        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row three-col" data-thumb="images/hart-island.jpg">
-          <span class="client">Hart Island</span>
           <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
@@ -322,7 +344,7 @@
   <!-- Hover preview -->
   <div id="thumb-preview"><img alt="" /><video muted playsinline loop preload="none"></video></div>
 
-  <script src="script.js?v=20261117155731"></script>
-  <script src="snake.js?v=20261117155731"></script>
+  <script src="script.js?v=20261117160330"></script>
+  <script src="snake.js?v=20261117160330"></script>
 </body>
 </html>

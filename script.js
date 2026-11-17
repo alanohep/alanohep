@@ -101,15 +101,22 @@ const heroSides  = { film: document.querySelector('.hero-side[data-side="film"]'
                      commercial: document.querySelector('.hero-side[data-side="commercial"]') };
 const reelSrc    = { film: 'videos/film-reel.mp4', commercial: 'videos/commercial-reel.mp4' };
 let side = null;
+let genre = null; // subgenre currently shown in the hero (computers only)
 const isPhone = matchMedia('(max-width: 640px)'); // phones: tabs instead of the split
 
+// Film rows carry their subgenre in the HTML (data-genre); commercial rows get it from their category
+const COMMERCIAL_GENRES = { 'Sports': 'sports', 'Fashion': 'fashion', 'Beauty': 'beauty', 'Branded & Social': 'branded' };
 document.querySelectorAll('.work-row').forEach(row => {
-  if (row.children[1] && row.children[1].dataset.en === 'Film') row.classList.add('is-film');
+  const cat = row.children[1] && row.children[1].dataset.en;
+  if (cat === 'Film') row.classList.add('is-film');
+  else if (COMMERCIAL_GENRES[cat]) row.dataset.genre = COMMERCIAL_GENRES[cat];
 });
 
 function setSide(next) {
   if (next === side) return;
   side = next;
+  setGenre(null);
+  delete document.body.dataset.genre; // a picked subgenre belongs to the other side
   document.body.dataset.side = side;
   for (const [name, el] of Object.entries(heroSides)) {
     const video = el.querySelector('video');
@@ -132,7 +139,45 @@ setSide(isPhone.matches ? 'film' : (Math.random() < 0.5 ? 'film' : 'commercial')
   else first.addEventListener('canplaythrough', loadSecond, { once: true });
 })();
 
-heroMain.addEventListener('mousemove', e => setSide(e.clientX < window.innerWidth / 2 ? 'film' : 'commercial'));
+// Subgenres: the top of the hero shows the reel; below that, the hero is split into equal bands,
+// one per subgenre of the side being shown. The band under the cursor shows its label (at that
+// height) and its still over the reel.
+const GENRE_TOP = 0.22, GENRE_BOTTOM = 0.88; // share of the hero height the bands cover
+
+function genreItems(name) {
+  return [...heroSides[name].querySelectorAll('.genre-labels span')].map(s => s.dataset.genre);
+}
+
+function placeGenreLabels() {
+  const h = heroMain.clientHeight;
+  for (const name of Object.keys(heroSides)) {
+    const spans = heroSides[name].querySelectorAll('.genre-labels span');
+    const band = (GENRE_BOTTOM - GENRE_TOP) * h / spans.length;
+    spans.forEach((s, i) => { s.style.top = GENRE_TOP * h + band * (i + 0.5) + 'px'; });
+  }
+}
+placeGenreLabels();
+window.addEventListener('resize', placeGenreLabels);
+
+function setGenre(next) {
+  if (next === genre) return;
+  genre = next;
+  for (const el of document.querySelectorAll('.genre-stills img, .genre-labels span')) {
+    const on = !!next && el.dataset.genre === next;
+    if (on && el.tagName === 'IMG' && !el.src) el.src = el.dataset.src; // load stills only when first needed
+    el.classList.toggle('active', on);
+  }
+}
+
+heroMain.addEventListener('mousemove', e => {
+  setSide(e.clientX < window.innerWidth / 2 ? 'film' : 'commercial');
+  const rect = heroMain.getBoundingClientRect();
+  const y = (e.clientY - rect.top) / rect.height;
+  const items = genreItems(side);
+  if (y < GENRE_TOP || y >= GENRE_BOTTOM || e.target.closest('a, button')) { setGenre(null); return; }
+  setGenre(items[Math.min(items.length - 1, Math.floor((y - GENRE_TOP) / (GENRE_BOTTOM - GENRE_TOP) * items.length))]);
+});
+heroMain.addEventListener('mouseleave', () => setGenre(null));
 
 // Top menu: Film / Commercial switch the hero side. On computers they also scroll down to that
 // part of the list; on phones they're tabs: the page shows only that side, from the top.
@@ -181,6 +226,12 @@ function closeReel() {
 heroMain.addEventListener('click', e => {
   if (heroMain.dataset.swiped) { delete heroMain.dataset.swiped; return; }
   if (e.target.closest('a, button')) return; // menu, language, music, etc.
+  if (genre) {
+    // A subgenre is showing: go down to the list with only its projects highlighted
+    document.body.dataset.genre = genre;
+    document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   openReel();
 });
 document.getElementById('watchReel').addEventListener('click', e => { e.preventDefault(); openReel(); });
