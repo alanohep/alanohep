@@ -115,10 +115,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Info banner */
+/* Same columns as the project list below, so "About" lines up with CREDIT */
 .strip-info {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
   padding: 0.85rem 2.5rem;
   border-top: 1px solid var(--border);
   align-items: center;
@@ -139,6 +140,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .strip-info-col a:hover { color: var(--text); }
+
+.strip-info-about { align-items: flex-end; text-align: right; }
+.strip-info-about a {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.65);
+}
 
 .corner {
   position: absolute;
@@ -509,6 +518,7 @@ footer {
   .strip-track { animation-duration: 40s; }
 
   /* Info banner: one column */
+  .strip-info-about { align-items: flex-start; text-align: left; }
   .strip-info {
     grid-template-columns: 1fr;
     gap: 0.6rem;
