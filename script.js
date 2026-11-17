@@ -113,13 +113,13 @@ document.querySelectorAll('.work-row').forEach(row => {
 });
 
 // Carousel under the hero: shows only the projects of the side being shown (built from the
-// project list), repeated so the loop always fills the screen. After a subgenre is clicked,
-// it shows only that subgenre's projects.
+// project list), repeated so the loop always fills the screen. While a subgenre is showing in
+// the hero (or after one is clicked), it shows only that subgenre's projects.
 let stripKey = '';
 function buildStrip() {
   const track = document.querySelector('.strip-track');
   if (!track) return;
-  const g = document.body.dataset.genre || ''; // the subgenre the visitor clicked
+  const g = genre || document.body.dataset.genre || '';
   const rows = [...document.querySelectorAll('.work-row[data-thumb]')]
     .filter(r => r.classList.contains('is-film') === (side === 'film'))
     .filter(r => !g || r.dataset.genre === g);
@@ -190,6 +190,7 @@ window.addEventListener('load', () => {
 function setGenre(next) {
   if (next === genre) return;
   genre = next;
+  buildStrip();
   for (const el of document.querySelectorAll('.genre-stills img, .genre-labels span')) {
     const on = !!next && el.dataset.genre === next;
     if (on && el.tagName === 'IMG' && !el.src) el.src = el.dataset.src; // load stills only when first needed
