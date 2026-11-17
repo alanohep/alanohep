@@ -1,4 +1,4 @@
-// Entry screen: a small retro snake game on an LCD-style screen.
+// Entry screen: a full-screen retro snake game on an LCD-style screen.
 // - The first key press / tap / swipe starts the game and the music (browsers only allow
 //   sound after an interaction).
 // - The ENTER button sits in the middle of the board: clicking it goes straight to the site,
@@ -8,26 +8,26 @@
   const splash   = document.getElementById('splash');
   const canvas   = document.getElementById('snake');
   const enterBtn = document.getElementById('splashEnter');
-  const hint     = document.getElementById('splashHint');
   const music    = document.getElementById('bgMusic');
   if (!splash || !canvas) return;
 
   const ctx = canvas.getContext('2d');
   const LCD_BG = '#b7c47a';
   const LCD_FG = '#26301a';
-  const COLS = 23, ROWS = 15;
-  const HEADER = 1.8;                       // score bar height, in cells
-  const BLOCK = { x: 8, y: 6, w: 7, h: 3 }; // cells covered by the ENTER button
-  const LCD_PAD = 10;                       // matches .lcd padding in style.css
+  const HEADER = 1.8;                  // top bar (name + score), in cells
+  const FOOTER = 1.6;                  // bottom bar (instructions), in cells
+  const BLOCK = { x: 0, y: 0, w: 7, h: 3 }; // cells covered by the ENTER button (centred in layout())
 
   const touchDevice = matchMedia('(pointer: coarse)').matches;
-  hint.textContent = touchDevice ? 'Swipe to play · lose to enter ♪' : 'Arrow keys to play · lose to enter ♪';
+  const HINT = touchDevice ? 'SWIPE TO PLAY · LOSE TO ENTER ♪' : 'ARROW KEYS TO PLAY · LOSE TO ENTER ♪';
 
-  let cell = 16;
+  // The board fills the screen: cell size comes from the screen, then as many cells as fit
+  let cell = 16, COLS = 24, ROWS = 16, ox = 0, oy = 0, W = 0, H = 0;
   let snake, dir, queue, food, score, interval, state = 'ready', last = 0, acc = 0, raf = 0, done = false;
 
   function reset() {
-    snake = [{ x: 6, y: 11 }, { x: 5, y: 11 }, { x: 4, y: 11 }, { x: 3, y: 11 }];
+    const y = Math.min(ROWS - 2, BLOCK.y + BLOCK.h + 2);
+    snake = [{ x: 6, y }, { x: 5, y }, { x: 4, y }, { x: 3, y }];
     dir = { x: 1, y: 0 };
     queue = [];
     score = 0;
@@ -47,19 +47,29 @@
 
   // ─── Layout ───
   function layout() {
-    const maxW = Math.min(window.innerWidth - 2 * LCD_PAD - 32, 520);
-    cell = Math.max(10, Math.floor(maxW / COLS));
-    const w = cell * COLS, h = cell * (ROWS + HEADER);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    // While a game is running keep the same grid (only re-centre it); before that, refit it
+    if (state === 'ready') {
+      cell = Math.max(14, Math.floor(Math.min(W, H) / 20));
+      COLS = Math.floor(W / cell);
+      ROWS = Math.floor(H / cell - HEADER - FOOTER);
+      BLOCK.x = Math.floor((COLS - BLOCK.w) / 2);
+      BLOCK.y = Math.floor((ROWS - BLOCK.h) / 2);
+      reset();
+    }
+    ox = Math.floor((W - COLS * cell) / 2);
+    oy = Math.floor((H - (ROWS + HEADER + FOOTER) * cell) / 2);
+
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
 
     Object.assign(enterBtn.style, {
-      left:   LCD_PAD + BLOCK.x * cell + 'px',
-      top:    LCD_PAD + (HEADER + BLOCK.y) * cell + 'px',
+      left:   ox + BLOCK.x * cell + 'px',
+      top:    oy + (HEADER + BLOCK.y) * cell + 'px',
       width:  BLOCK.w * cell + 'px',
       height: BLOCK.h * cell + 'px',
       fontSize: Math.round(cell * 1.6) + 'px',
@@ -77,21 +87,27 @@
   }
 
   function draw() {
-    const w = cell * COLS, top = HEADER * cell;
+    const dpr = window.devicePixelRatio || 1;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = LCD_BG;
-    ctx.fillRect(0, 0, w, top + ROWS * cell);
+    ctx.fillRect(0, 0, W, H);
+    ctx.translate(ox, oy);
 
-    // Score bar
+    const w = cell * COLS, top = HEADER * cell, bottom = top + ROWS * cell;
+    const size = Math.min(cell * 1.3, 34);
+
+    // Top bar: name on the left, score (or GAME OVER) on the right
     const midY = top / 2;
-    if (state === 'over') {
-      text('GAME OVER', cell * 0.6, midY, cell * 1.4);
-    } else {
-      text(String(score).padStart(4, '0'), cell * 0.6, midY, cell * 1.4);
-    }
-    if (state === 'ready') text(touchDevice ? 'SWIPE' : 'PRESS ←↑→↓', w - cell * 0.6, midY, cell * 1.2, 'right');
-    if (state === 'over')  text(String(score).padStart(4, '0'), w - cell * 0.6, midY, cell * 1.4, 'right');
+    text('ALAN OHEP', cell * 0.3, midY, size);
+    text(state === 'over' ? `GAME OVER  ${String(score).padStart(4, '0')}` : String(score).padStart(4, '0'),
+         w - cell * 0.3, midY, size, 'right');
     ctx.fillStyle = LCD_FG;
-    ctx.fillRect(0, top - 2, w, 2);
+    ctx.fillRect(0, top - 3, w, 3);
+    ctx.fillRect(0, bottom + 1, w, 3);
+
+    // Bottom bar: instructions
+    text(HINT, w / 2, bottom + (FOOTER * cell) / 2 + 2, Math.min(cell * 0.95, 24), 'center');
+    ctx.fillStyle = LCD_FG;
 
     // Faint LCD pixel grid
     ctx.fillStyle = 'rgba(38,48,26,0.06)';
