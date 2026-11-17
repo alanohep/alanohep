@@ -124,6 +124,9 @@ let restartTimer = null;
 function showTrack(index) {
   const t = SPOTIFY_TRACKS[index];
   if (!t) return;
+  // Replace the "Click to play" hint; drop its translations so the language toggle doesn't bring it back
+  nowPlayingTitle.removeAttribute('data-en');
+  nowPlayingTitle.removeAttribute('data-es');
   nowPlayingTitle.textContent = `${t[1]} — ${t[2]}`;
   nowPlaying.hidden = false;
 }
