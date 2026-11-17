@@ -145,26 +145,10 @@ music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().
 
 loadTrack(0);
 
-// Entry screen: clicking "Enter" (or anywhere on it) starts the music and reveals the site
-const splash = document.getElementById('splash');
-let splashOpen = true;
-
-function enterSite() {
-  if (!splashOpen) return;
-  splashOpen = false;
-  music.play().catch(() => {});
-  splash.classList.add('hidden');
-  document.body.classList.remove('splash-open');
-  setTimeout(() => splash.remove(), 900);
-}
-
-splash.addEventListener('click', enterSite);
-document.getElementById('splashEnter').focus({ preventScroll: true });
-
-// After entering, any click / tap on the page pauses or resumes the music.
-// ('click' rather than 'pointerdown', so swiping to scroll on a phone doesn't toggle it)
+// After entering (see snake.js for the entry game), any click / tap on the page pauses or
+// resumes the music. ('click' rather than 'pointerdown', so swiping to scroll doesn't toggle it)
 document.addEventListener('click', () => {
-  if (splashOpen) return;
+  if (document.body.classList.contains('splash-open')) return;
   if (music.paused) music.play().catch(() => {});
   else music.pause();
 }, true);
