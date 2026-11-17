@@ -270,6 +270,15 @@ placeMusicLine();
 window.addEventListener('resize', placeMusicLine);
 if (document.fonts) document.fonts.ready.then(placeMusicLine);
 
+// The site's songs keep playing until the visitor clicks something else on the page
+// (a link, a project, the hero / a reel, a button…). Then they stop; the song line
+// under the name plays them again. The song line itself and the ES/EN toggle don't stop them.
+document.addEventListener('click', e => {
+  if (document.body.classList.contains('splash-open')) return; // still on the entry game
+  if (e.target.closest('#nowPlaying, #langToggle')) return;
+  if (e.target.closest('a, button, .hero-main, .work-row')) music.pause();
+}, true);
+
 // The song line is the play / pause button
 const nowPlayingBtn  = document.getElementById('nowPlaying');
 const nowPlayingIcon = document.getElementById('nowPlayingIcon');
