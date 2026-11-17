@@ -496,6 +496,7 @@ footer {
 /* Anchor targets inside the unified project list (clear the fixed top bar) */
 #film, #commercial { scroll-margin-top: 6rem; }
 #works { scroll-margin-top: 3rem; }
+#selected { scroll-margin-top: 6rem; } /* "Selected Works" lands on the carousel, clear of the fixed header */
 
 #thumb-preview [hidden] { display: none; }
 
