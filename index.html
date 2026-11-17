@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20261117161830" />
+  <link rel="stylesheet" href="style.css?v=20261117162108" />
 </head>
 <body class="splash-open">
 
@@ -44,11 +44,6 @@
            On phones there's no split: Film / Commercial in the top menu work as tabs. -->
       <div class="hero-side" data-side="film">
         <video class="hero-featured" src="videos/film-reel-bg.mp4" poster="images/film-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
-        <div class="genre-stills">
-          <img data-genre="fiction" data-src="images/genres/fiction.jpg" alt="" />
-          <img data-genre="documentary" data-src="images/genres/documentary.jpg" alt="" />
-          <img data-genre="trailer" data-src="images/genres/trailer.jpg" alt="" />
-        </div>
         <div class="genre-labels">
           <span data-genre="fiction" data-en="Fiction" data-es="Ficción">Fiction</span>
           <span data-genre="documentary" data-en="Documentary" data-es="Documental">Documentary</span>
@@ -57,12 +52,6 @@
       </div>
       <div class="hero-side" data-side="commercial">
         <video class="hero-featured" src="videos/commercial-reel-bg.mp4" poster="images/commercial-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
-        <div class="genre-stills">
-          <img data-genre="sports" data-src="images/genres/sports.jpg" alt="" />
-          <img data-genre="fashion" data-src="images/genres/fashion.jpg" alt="" />
-          <img data-genre="beauty" data-src="images/genres/beauty.jpg" alt="" />
-          <img data-genre="branded" data-src="images/genres/branded.jpg" alt="" />
-        </div>
         <div class="genre-labels">
           <span data-genre="sports" data-en="Sports" data-es="Deportes">Sports</span>
           <span data-genre="fashion" data-en="Fashion" data-es="Moda">Fashion</span>
@@ -99,45 +88,8 @@
 
     </div>
 
-    <!-- Sliding thumbnails + info banner -->
+    <!-- Info banner -->
     <div class="hero-strip">
-
-      <!-- Auto-sliding images (duplicated for seamless loop) -->
-      <div class="strip-images">
-        <div class="strip-track">
-          <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="strip-item"><img src="images/dior.jpg" alt="Dior" /></a>
-          <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="strip-item"><img src="images/ralph-lauren.jpg" alt="Ralph Lauren" /></a>
-          <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="strip-item"><img src="images/laura-mercier.jpg" alt="Laura Mercier" /></a>
-          <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="strip-item"><img src="images/dicks-philly.jpg" alt="Dick's Philadelphia" /></a>
-          <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="strip-item"><img src="images/dicks-alaska.jpg" alt="Dick's Alaska" /></a>
-          <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="strip-item"><img src="images/yo-y-las-bestias.jpg" alt="Yo y las Bestias" /></a>
-          <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="strip-item"><img src="images/hart-island.jpg" alt="Hart Island" /></a>
-          <a href="https://vimeo.com/1050197105" target="_blank" class="strip-item"><img src="images/fresh.jpg" alt="Fresh" /></a>
-          <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item"><img src="images/bershka.jpg" alt="Bershka" /></a>
-          <a href="https://vimeo.com/1050198358" target="_blank" class="strip-item"><img src="images/lab-series.jpg" alt="Lab Series" /></a>
-          <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item"><img src="images/caudalie.jpg" alt="Caudalie" /></a>
-          <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="strip-item"><img src="images/effy-jewelry.jpg" alt="Effy Jewelry" /></a>
-          <a href="https://vimeo.com/970118627" target="_blank" class="strip-item"><img src="images/citizen-watches.jpg" alt="Citizen Watches" /></a>
-          <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="strip-item"><img src="images/electrolit.jpg" alt="Electrolit" /></a>
-          <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="strip-item"><img src="images/buscando-un-burro.jpg" alt="Buscando un Burro" /></a>
-          <!-- Duplicate for seamless loop -->
-          <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dior.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="strip-item" aria-hidden="true"><img src="images/ralph-lauren.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="strip-item" aria-hidden="true"><img src="images/laura-mercier.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dicks-philly.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dicks-alaska.jpg" alt="" /></a>
-          <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="strip-item" aria-hidden="true"><img src="images/yo-y-las-bestias.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="strip-item" aria-hidden="true"><img src="images/hart-island.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1050197105" target="_blank" class="strip-item" aria-hidden="true"><img src="images/fresh.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item" aria-hidden="true"><img src="images/bershka.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1050198358" target="_blank" class="strip-item" aria-hidden="true"><img src="images/lab-series.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item" aria-hidden="true"><img src="images/caudalie.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="strip-item" aria-hidden="true"><img src="images/effy-jewelry.jpg" alt="" /></a>
-          <a href="https://vimeo.com/970118627" target="_blank" class="strip-item" aria-hidden="true"><img src="images/citizen-watches.jpg" alt="" /></a>
-          <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="strip-item" aria-hidden="true"><img src="images/electrolit.jpg" alt="" /></a>
-          <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="strip-item" aria-hidden="true"><img src="images/buscando-un-burro.jpg" alt="" /></a>
-        </div>
-      </div>
 
       <!-- Info banner -->
       <div class="strip-info">
@@ -156,6 +108,46 @@
 
   </section>
 
+  <!-- Carousel (appears as the visitor scrolls down): top projects of the side being shown -->
+  <div class="carousel">
+        <!-- Auto-sliding images (duplicated for seamless loop) -->
+        <div class="strip-images">
+          <div class="strip-track">
+            <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="strip-item"><img src="images/dior.jpg" alt="Dior" /></a>
+            <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="strip-item"><img src="images/ralph-lauren.jpg" alt="Ralph Lauren" /></a>
+            <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="strip-item"><img src="images/laura-mercier.jpg" alt="Laura Mercier" /></a>
+            <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="strip-item"><img src="images/dicks-philly.jpg" alt="Dick's Philadelphia" /></a>
+            <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="strip-item"><img src="images/dicks-alaska.jpg" alt="Dick's Alaska" /></a>
+            <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="strip-item"><img src="images/yo-y-las-bestias.jpg" alt="Yo y las Bestias" /></a>
+            <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="strip-item"><img src="images/hart-island.jpg" alt="Hart Island" /></a>
+            <a href="https://vimeo.com/1050197105" target="_blank" class="strip-item"><img src="images/fresh.jpg" alt="Fresh" /></a>
+            <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item"><img src="images/bershka.jpg" alt="Bershka" /></a>
+            <a href="https://vimeo.com/1050198358" target="_blank" class="strip-item"><img src="images/lab-series.jpg" alt="Lab Series" /></a>
+            <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item"><img src="images/caudalie.jpg" alt="Caudalie" /></a>
+            <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="strip-item"><img src="images/effy-jewelry.jpg" alt="Effy Jewelry" /></a>
+            <a href="https://vimeo.com/970118627" target="_blank" class="strip-item"><img src="images/citizen-watches.jpg" alt="Citizen Watches" /></a>
+            <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="strip-item"><img src="images/electrolit.jpg" alt="Electrolit" /></a>
+            <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="strip-item"><img src="images/buscando-un-burro.jpg" alt="Buscando un Burro" /></a>
+            <!-- Duplicate for seamless loop -->
+            <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dior.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="strip-item" aria-hidden="true"><img src="images/ralph-lauren.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1008607034/6d6bdf6892" target="_blank" class="strip-item" aria-hidden="true"><img src="images/laura-mercier.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1050197714/65b3336687" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dicks-philly.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="strip-item" aria-hidden="true"><img src="images/dicks-alaska.jpg" alt="" /></a>
+            <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="strip-item" aria-hidden="true"><img src="images/yo-y-las-bestias.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="strip-item" aria-hidden="true"><img src="images/hart-island.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1050197105" target="_blank" class="strip-item" aria-hidden="true"><img src="images/fresh.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item" aria-hidden="true"><img src="images/bershka.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1050198358" target="_blank" class="strip-item" aria-hidden="true"><img src="images/lab-series.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1061439642" target="_blank" class="strip-item" aria-hidden="true"><img src="images/caudalie.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1168187092/575964a9a3" target="_blank" class="strip-item" aria-hidden="true"><img src="images/effy-jewelry.jpg" alt="" /></a>
+            <a href="https://vimeo.com/970118627" target="_blank" class="strip-item" aria-hidden="true"><img src="images/citizen-watches.jpg" alt="" /></a>
+            <a href="https://vimeo.com/1231715938/91493c4c05" target="_blank" class="strip-item" aria-hidden="true"><img src="images/electrolit.jpg" alt="" /></a>
+            <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="strip-item" aria-hidden="true"><img src="images/buscando-un-burro.jpg" alt="" /></a>
+          </div>
+        </div>
+  </div>
+
   <!-- WORK LIST -->
   <section id="works">
     <div class="container">
@@ -166,27 +158,27 @@
       </div>
       <div class="work-table">
 
-        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row three-col" id="film" data-thumb="images/yo-y-las-bestias.jpg" data-genre="fiction">
+        <a href="https://www.youtube.com/watch?v=Rw-N4G2DRxI" target="_blank" class="work-row three-col" data-top id="film" data-thumb="images/yo-y-las-bestias.jpg" data-genre="fiction">
           <span class="client">Yo y las Bestias</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Production &amp; Edit" data-es="Producción y Edición">Production &amp; Edit</span>
         </a>
-        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row three-col" data-thumb="images/buscando-un-burro.jpg" data-genre="documentary">
+        <a href="https://www.youtube.com/watch?v=NPY15kMqXHc&t=23s" target="_blank" class="work-row three-col" data-top data-thumb="images/buscando-un-burro.jpg" data-genre="documentary">
           <span class="client">Buscando un Burro</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Co-Edit, Trailer Edit" data-es="Co-Edición, Edición del Tráiler">Co-Edit, Trailer Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row three-col" data-thumb="images/spirit-awards.jpg" data-genre="trailer">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/928200820" target="_blank" class="work-row three-col" data-top data-thumb="images/spirit-awards.jpg" data-genre="trailer">
           <span class="client">Film Independent Spirit Awards</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Creative Direction &amp; Co-Edit" data-es="Dirección Creativa y Co-Edición">Creative Direction &amp; Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row three-col" data-genre="documentary" data-thumb="images/hart-island.jpg">
+        <a href="https://vimeo.com/1228987000/e34137f912" target="_blank" class="work-row three-col" data-top data-genre="documentary" data-thumb="images/hart-island.jpg">
           <span class="client">Hart Island</span>
           <span class="cat" data-en="Film" data-es="Cine">Film</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col" id="commercial" data-thumb="images/jd-sports.jpg">
+        <a href="https://vimeo.com/reviews/b73c028b-ab83-4234-bbea-e2745785cdad/videos/1019878581" target="_blank" class="work-row three-col" data-top id="commercial" data-thumb="images/jd-sports.jpg">
           <span class="client">JD Sports</span>
           <span class="cat" data-en="Sports" data-es="Deportes">Sports</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
@@ -211,12 +203,12 @@
           <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
           <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
         </a>
-        <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="work-row three-col" data-thumb="images/ralph-lauren.jpg">
+        <a href="https://vimeo.com/1168184767/e2b311ac0a" target="_blank" class="work-row three-col" data-top data-thumb="images/ralph-lauren.jpg">
           <span class="client">Ralph Lauren</span>
           <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/933819495" target="_blank" class="work-row three-col" data-thumb="images/lacoste.jpg">
+        <a href="https://vimeo.com/933819495" target="_blank" class="work-row three-col" data-top data-thumb="images/lacoste.jpg">
           <span class="client">Lacoste</span>
           <span class="cat" data-en="Fashion" data-es="Moda">Fashion</span>
           <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
@@ -251,12 +243,12 @@
           <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="work-row three-col" data-thumb="images/dicks-alaska.jpg">
+        <a href="https://vimeo.com/1050191858/4f924d770b" target="_blank" class="work-row three-col" data-top data-thumb="images/dicks-alaska.jpg">
           <span class="client">Dick's Sporting Goods — Alaska</span>
           <span class="cat" data-en="Branded &amp; Social" data-es="Branded y Social">Branded &amp; Social</span>
           <span class="cat credit" data-en="Co-Edit" data-es="Co-Edición">Co-Edit</span>
         </a>
-        <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="work-row three-col" data-thumb="images/dior.jpg">
+        <a href="https://vimeo.com/1062934780/85faeee801" target="_blank" class="work-row three-col" data-top data-thumb="images/dior.jpg">
           <span class="client">Dior</span>
           <span class="cat" data-en="Beauty" data-es="Belleza">Beauty</span>
           <span class="cat credit" data-en="Edit" data-es="Edición">Edit</span>
@@ -344,7 +336,7 @@
   <!-- Hover preview -->
   <div id="thumb-preview"><img alt="" /><video muted playsinline loop preload="none"></video></div>
 
-  <script src="script.js?v=20261117161830"></script>
-  <script src="snake.js?v=20261117161830"></script>
+  <script src="script.js?v=20261117162108"></script>
+  <script src="snake.js?v=20261117162108"></script>
 </body>
 </html>

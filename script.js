@@ -122,13 +122,14 @@ function buildStrip() {
   const g = genre || document.body.dataset.genre || '';
   const rows = [...document.querySelectorAll('.work-row[data-thumb]')]
     .filter(r => r.classList.contains('is-film') === (side === 'film'))
-    .filter(r => !g || r.dataset.genre === g);
+    .filter(r => g ? r.dataset.genre === g : r.hasAttribute('data-top')); // top picks (data-top) unless a subgenre is chosen
   if (!rows.length || stripKey === side + g) return;
   stripKey = side + g;
   const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb}" alt="" /></a>`;
   let set = rows.map(item).join('');
   let count = rows.length;
-  while (count * 242 < window.innerWidth + 300) { set += rows.map(item).join(''); count += rows.length; }
+  const itemW = document.querySelector('.strip-item') ? document.querySelector('.strip-item').offsetWidth + 2 : 362;
+  while (count * itemW < window.innerWidth + 400) { set += rows.map(item).join(''); count += rows.length; }
   track.innerHTML = set + set; // two copies: the animation slides by half for a seamless loop
   track.style.animationDuration = count * 3.7 + 's';
 }
@@ -181,20 +182,13 @@ function placeGenreLabels() {
 placeGenreLabels();
 window.addEventListener('resize', placeGenreLabels);
 
-// Fetch the subgenre stills shortly after the page loads (computers only), so they show instantly
-window.addEventListener('load', () => {
-  if (isPhone.matches) return;
-  document.querySelectorAll('.genre-stills img').forEach(img => { if (!img.src) img.src = img.dataset.src; });
-});
 
 function setGenre(next) {
   if (next === genre) return;
   genre = next;
   buildStrip();
-  for (const el of document.querySelectorAll('.genre-stills img, .genre-labels span')) {
-    const on = !!next && el.dataset.genre === next;
-    if (on && el.tagName === 'IMG' && !el.src) el.src = el.dataset.src; // load stills only when first needed
-    el.classList.toggle('active', on);
+  for (const el of document.querySelectorAll('.genre-labels span')) {
+    el.classList.toggle('active', !!next && el.dataset.genre === next);
   }
 }
 

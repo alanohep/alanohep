@@ -82,7 +82,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Sliding images */
 .strip-images {
-  height: 155px;
+  height: 230px;
   overflow: hidden;
 }
 
@@ -105,7 +105,7 @@ a { color: inherit; text-decoration: none; }
 
 .strip-item {
   flex: 0 0 auto;
-  width: 240px;
+  width: 360px;
   height: 100%;
   overflow: hidden;
   display: block;
@@ -580,18 +580,8 @@ body.splash-open { overflow: hidden; }
 
 /* ─── SPLIT HERO: subgenres ─── */
 /* As the cursor moves down a side, that side's subgenre at the cursor's height emerges in
-   big type and its still replaces the reel behind it (script.js picks it). Computers only. */
+   big type over the reel, which keeps playing behind it (script.js picks it). Computers only. */
 .hero-side { z-index: 0; }
-.genre-stills img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.genre-stills img.active { opacity: 1; }
 
 .genre-labels {
   position: absolute;
@@ -639,7 +629,7 @@ body[data-genre="trailer"] .strip-item[data-genre="trailer"],
 body[data-genre="sports"] .strip-item[data-genre="sports"],
 body[data-genre="fashion"] .strip-item[data-genre="fashion"],
 body[data-genre="beauty"] .strip-item[data-genre="beauty"],
-body[data-genre="branded"] .strip-item[data-genre="branded"] { width: 300px; opacity: 1; }
+body[data-genre="branded"] .strip-item[data-genre="branded"] { width: 440px; opacity: 1; }
 
 /* ─── SPLIT HERO: project list highlight ─── */
 /* The whole list stays; rows from the side not being shown fade back */
@@ -697,7 +687,7 @@ body[data-side] .work-row:hover { opacity: 1; }
   .now-playing { font-size: 0.62rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
   .hero-main { touch-action: pan-y; }
-  .genre-labels, .genre-stills { display: none; } /* no cursor on phones */
+  .genre-labels { display: none; } /* no cursor on phones */
 
   /* Film / Commercial work as tabs: the active one is lit and underlined */
   .corner.top-right a[href="#film"],
@@ -712,8 +702,8 @@ body[data-side] .work-row:hover { opacity: 1; }
   body::before { height: 5.5rem; }
 
   /* Sliding strip: smaller tiles */
-  .strip-images { height: 105px; }
-  .strip-item { width: 165px; }
+  .strip-images { height: 140px; }
+  .strip-item { width: 220px; }
   .strip-track { animation-duration: 40s; }
 
   /* Info banner: one column */
