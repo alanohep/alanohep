@@ -18,7 +18,7 @@
   const HEADER = 1.8;                       // top bar (name + score), in cells
   const FOOTER = 1.6;                       // bottom bar (instructions), in cells
   const BLOCK = { x: 0, y: 0, w: 7, h: 3 }; // cells covered by the ENTER button (centred in layout())
-  const FILL = 0.3;                         // share of the free board the starting snake covers
+  const FILL = 0.7;                         // share of the free board the starting snake covers
 
   const touchDevice = matchMedia('(pointer: coarse)').matches;
   const HINT = touchDevice ? 'TAP TO PLAY' : 'PRESS ANY KEY TO PLAY';

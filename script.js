@@ -143,7 +143,17 @@ music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().
 
 loadTrack(0);
 
-// The song line in the top-left corner is the play / pause button
+// The song line stays fixed on screen; line it up right under "Lead Editor"
+const musicLine = document.getElementById('musicLine');
+const heroRole  = document.querySelector('.hero-role');
+function placeMusicLine() {
+  musicLine.style.top = heroRole.getBoundingClientRect().bottom + window.scrollY + 5 + 'px';
+}
+placeMusicLine();
+window.addEventListener('resize', placeMusicLine);
+if (document.fonts) document.fonts.ready.then(placeMusicLine);
+
+// The song line is the play / pause button
 const nowPlayingBtn  = document.getElementById('nowPlaying');
 const nowPlayingIcon = document.getElementById('nowPlayingIcon');
 nowPlayingBtn.addEventListener('click', () => {
