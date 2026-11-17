@@ -3,8 +3,8 @@
 // - Any key / tap starts it. The ENTER button in the middle of the board is a wall for the
 //   snake; clicking it goes straight to the site.
 // - The music starts with the game (browsers only allow sound after a key press / tap).
-// - Losing (hitting a wall, ENTER or itself) or clicking ENTER stops the music and reveals
-//   the site, where the song line under the name lets the visitor play it again.
+// - Losing (hitting a wall, ENTER or itself) or clicking ENTER reveals the site, and the
+//   music switches to the site's songs (see script.js).
 (() => {
   const splash   = document.getElementById('splash');
   const canvas   = document.getElementById('snake');
@@ -286,7 +286,7 @@
     done = true;
     state = 'over';
     cancelAnimationFrame(raf);
-    if (music) music.pause();
+    if (window.startSiteMusic) window.startSiteMusic(); // the site has its own songs
     splash.classList.add('hidden');
     document.body.classList.remove('splash-open');
     document.removeEventListener('keydown', onKey, true);

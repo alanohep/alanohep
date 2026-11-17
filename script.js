@@ -207,33 +207,52 @@ window.addEventListener('scroll', updateScrolled, { passive: true });
 window.addEventListener('resize', updateScrolled);
 updateScrolled();
 
-// Background music
-// Plays the tracks below in order and loops back to the first when the last one ends.
-// It starts with the snake game on the entry screen (snake.js) and stops when the visitor
-// enters the site; the song line under the name in the top-left corner plays / pauses it.
-const MUSIC_TRACKS = [
-  { src: 'music/pt1.m4a', title: 'Fallen Waves - Soundtrack Part 1' },
-  { src: 'music/pt2.m4a', title: 'Fallen Waves - Soundtrack Part 2' },
-  { src: 'music/pt3.m4a', title: 'Fallen Waves - Soundtrack Part 3' },
-  { src: 'music/pt4.m4a', title: 'Fallen Waves - Soundtrack Part 4' },
-  { src: 'music/pt5.m4a', title: 'Fallen Waves - Soundtrack Part 5' },
-];
+// Background music — two playlists, each played in order and looped:
+// - GAME_TRACKS (Fallen Waves soundtrack) plays during the snake game on the entry screen (snake.js)
+// - SITE_TRACKS takes over automatically when the visitor enters the site
+// The song line under the name in the top-left corner plays / pauses it.
+// `mark` is shown after the title and points to that song's credit at the bottom of the page.
+// Every song name has an English and a Spanish version (`en` / `es`).
+const GAME_TRACKS = [1, 2, 3, 4, 5].map(n => ({
+  src: `music/pt${n}.m4a`,
+  en: `Fallen Waves - Soundtrack Part ${n}`,
+  es: `Caen las Olas - Soundtrack Parte ${n}`,
+  mark: '*',
+}));
+const SITE_TRACKS = [
+  { src: 'music/leitmotiv.m4a',          en: 'Leitmotiv - Yo y Las Bestias',            mark: '†' },
+  { src: 'music/esta-via-esta-vida.m4a', en: 'Esta Vía, Esta Vida - Yo y Las Bestias',  mark: '‡' },
+  { src: 'music/al-pie-del-volcan.m4a',  en: 'Al Pie del Volcán - Yo y Las Bestias',     mark: '§' },
+  { src: 'music/caraballeda.m4a',        en: 'Caraballeda - Yo y Las Bestias',          mark: '¶' },
+].map(t => ({ ...t, es: t.en })); // song names are the same in both languages
 
 const music           = document.getElementById('bgMusic');
 const nowPlayingTitle = document.getElementById('nowPlayingTitle');
+const nowPlayingMark  = document.getElementById('nowPlayingMark');
+let playlist = GAME_TRACKS;
 let trackIndex = 0;
 
 function loadTrack(index) {
-  trackIndex = index % MUSIC_TRACKS.length;
-  music.src = MUSIC_TRACKS[trackIndex].src;
+  trackIndex = index % playlist.length;
+  music.src = playlist[trackIndex].src;
 }
 
 function showTrack() {
-  // Replace the "Play music" hint; drop its translations so the language toggle doesn't bring it back
-  nowPlayingTitle.removeAttribute('data-en');
-  nowPlayingTitle.removeAttribute('data-es');
-  nowPlayingTitle.textContent = MUSIC_TRACKS[trackIndex].title;
+  // Replace the "Play music" hint with the song name, in both languages so the ES/EN toggle swaps it
+  const t = playlist[trackIndex];
+  nowPlayingTitle.dataset.en = t.en;
+  nowPlayingTitle.dataset.es = t.es;
+  nowPlayingTitle.textContent = lang === 'es' ? t.es : t.en;
+  nowPlayingMark.textContent = t.mark;
 }
+
+// Called by snake.js when the visitor enters the site: switch to the site's songs and play them
+window.startSiteMusic = () => {
+  if (playlist === SITE_TRACKS) return;
+  playlist = SITE_TRACKS;
+  loadTrack(0);
+  music.play().catch(() => {});
+};
 
 music.addEventListener('playing', showTrack);
 music.addEventListener('ended', () => { loadTrack(trackIndex + 1); music.play().catch(() => {}); });

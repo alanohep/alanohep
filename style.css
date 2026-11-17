@@ -514,6 +514,9 @@ footer {
   padding: 0 2.5rem 1.5rem;
   font-size: 0.7rem;
   color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 /* ─── ENTRY SCREEN ─── */

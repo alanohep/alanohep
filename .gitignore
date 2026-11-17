@@ -5,3 +5,6 @@ music/*.wav
 
 # Original reel exports (the site uses the compressed versions in videos/)
 videos/originals/
+
+# Original song files (the site uses the .m4a versions)
+music/*.mp3

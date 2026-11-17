@@ -58,7 +58,7 @@
       <!-- Song line: stays up in the hero while the rest of the header follows the scroll
            (script.js places it right under "Lead Editor") -->
       <div class="music-line" id="musicLine">
-        <button class="now-playing" id="nowPlaying" aria-label="Play / pause music"><span id="nowPlayingIcon">▶</span> <span id="nowPlayingTitle" data-en="Play music" data-es="Escuchar música">Play music</span>*</button>
+        <button class="now-playing" id="nowPlaying" aria-label="Play / pause music"><span id="nowPlayingIcon">▶</span> <span id="nowPlayingTitle" data-en="Play music" data-es="Escuchar música">Play music</span><span id="nowPlayingMark"></span></button>
       </div>
 
       <div class="corner top-right">
@@ -280,7 +280,13 @@
   </footer>
 
   <!-- Extra credits -->
-  <p class="extra-credits" data-en="* Soundtrack from &lt;em&gt;Fallen Waves&lt;/em&gt; by León Melo" data-es="* Soundtrack de &lt;em&gt;Caen las Olas&lt;/em&gt; por León Melo">* Soundtrack from <em>Fallen Waves</em> by León Melo</p>
+  <div class="extra-credits">
+    <p data-en="* Soundtrack from &lt;em&gt;Fallen Waves&lt;/em&gt; by León Melo" data-es="* Soundtrack de &lt;em&gt;Caen las Olas&lt;/em&gt; por León Melo">* Soundtrack from <em>Fallen Waves</em> by León Melo</p>
+    <p data-en="† &lt;em&gt;Leitmotiv&lt;/em&gt; — Yo y las Bestias, from &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano" data-es="† &lt;em&gt;Leitmotiv&lt;/em&gt; — Yo y las Bestias, de &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano">† <em>Leitmotiv</em> — Yo y las Bestias, from <em>Me and the Beasts (Original Soundtrack)</em>. ℗ 2023 Nico Manzano</p>
+    <p data-en="‡ &lt;em&gt;Esta Vía, Esta Vida&lt;/em&gt; — Yo y las Bestias, from &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano" data-es="‡ &lt;em&gt;Esta Vía, Esta Vida&lt;/em&gt; — Yo y las Bestias, de &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano">‡ <em>Esta Vía, Esta Vida</em> — Yo y las Bestias, from <em>Me and the Beasts (Original Soundtrack)</em>. ℗ 2023 Nico Manzano</p>
+    <p data-en="§ &lt;em&gt;Al Pie del Volcán&lt;/em&gt; — Yo y las Bestias, from the single &lt;em&gt;Al Pie del Volcán&lt;/em&gt;. ℗ 2022 Nicolás Manzano" data-es="§ &lt;em&gt;Al Pie del Volcán&lt;/em&gt; — Yo y las Bestias, del sencillo &lt;em&gt;Al Pie del Volcán&lt;/em&gt;. ℗ 2022 Nicolás Manzano">§ <em>Al Pie del Volcán</em> — Yo y las Bestias, from the single <em>Al Pie del Volcán</em>. ℗ 2022 Nicolás Manzano</p>
+    <p data-en="¶ &lt;em&gt;Caraballeda&lt;/em&gt; — Yo y las Bestias, from &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano" data-es="¶ &lt;em&gt;Caraballeda&lt;/em&gt; — Yo y las Bestias, de &lt;em&gt;Me and the Beasts (Original Soundtrack)&lt;/em&gt;. ℗ 2023 Nico Manzano">¶ <em>Caraballeda</em> — Yo y las Bestias, from <em>Me and the Beasts (Original Soundtrack)</em>. ℗ 2023 Nico Manzano</p>
+  </div>
 
   <!-- About popup -->
   <div class="about-modal" id="aboutModal">
