@@ -451,7 +451,9 @@ footer {
 
 .now-playing[hidden] { display: none; }
 
-.now-playing-credit {
-  margin-top: 0.15rem;
-  color: rgba(240,237,232,0.75);
+/* ─── EXTRA CREDITS (below the footer) ─── */
+.extra-credits {
+  padding: 0 2.5rem 1.5rem;
+  font-size: 0.7rem;
+  color: var(--muted);
 }
