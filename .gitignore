@@ -2,3 +2,6 @@
 music/*.wav
 .DS_Store
 .idea/
+
+# Original reel exports (the site uses the compressed versions in videos/)
+videos/originals/

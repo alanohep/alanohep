@@ -101,6 +101,7 @@ const heroSides  = { film: document.querySelector('.hero-side[data-side="film"]'
                      commercial: document.querySelector('.hero-side[data-side="commercial"]') };
 const reelSrc    = { film: 'videos/film-reel.mp4', commercial: 'videos/commercial-reel.mp4' };
 let side = null;
+const isPhone = matchMedia('(max-width: 640px)'); // phones: tabs instead of the split
 
 document.querySelectorAll('.work-row').forEach(row => {
   if (row.children[1] && row.children[1].dataset.en === 'Film') row.classList.add('is-film');
@@ -117,7 +118,8 @@ function setSide(next) {
     else setTimeout(() => { if (side !== name) video.pause(); }, 450); // after the fade
   }
 }
-setSide(Math.random() < 0.5 ? 'film' : 'commercial');
+// Phones always open on Film; elsewhere the side is random
+setSide(isPhone.matches ? 'film' : (Math.random() < 0.5 ? 'film' : 'commercial'));
 
 // Load the side the visitor landed on first (it downloads behind the entry game);
 // only once it can play through, fetch the other side's reel.
@@ -132,15 +134,23 @@ setSide(Math.random() < 0.5 ? 'film' : 'commercial');
 
 heroMain.addEventListener('mousemove', e => setSide(e.clientX < window.innerWidth / 2 ? 'film' : 'commercial'));
 
-// Top menu: Commercial / Film also switch the hero side (and still scroll to the list)
-document.querySelector('.corner.top-right a[href="#film"]').addEventListener('click', () => setSide('film'));
-document.querySelector('.corner.top-right a[href="#commercial"]').addEventListener('click', () => setSide('commercial'));
+// Top menu: Film / Commercial switch the hero side. On computers they also scroll down to that
+// part of the list; on phones they're tabs: the page shows only that side, from the top.
+for (const name of ['film', 'commercial']) {
+  document.querySelector(`.corner.top-right a[href="#${name}"]`).addEventListener('click', e => {
+    setSide(name);
+    if (isPhone.matches) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+}
 
 // Phones: horizontal swipe on the hero switches side (finger to the left = the right side comes in)
 let heroTouch = null;
 heroMain.addEventListener('touchstart', e => { const t = e.touches[0]; heroTouch = { x: t.clientX, y: t.clientY }; }, { passive: true });
 heroMain.addEventListener('touchend', e => {
-  if (!heroTouch) return;
+  if (!heroTouch || isPhone.matches) return; // no swipe on phones (they use the tabs)
   const t = e.changedTouches[0];
   const dx = t.clientX - heroTouch.x, dy = t.clientY - heroTouch.y;
   heroTouch = null;

@@ -610,7 +610,17 @@ body[data-side] .work-row:hover { opacity: 1; }
   .corner.bottom-right a { font-size: 0.9rem; }
   .now-playing { font-size: 0.7rem; max-width: calc(100vw - 2.5rem); }
   .lang-toggle { padding: 0.4rem 0.6rem; } /* bigger tap target */
-  .hero-main { touch-action: pan-y; } /* vertical scroll stays native; horizontal swipes switch side */
+  .hero-main { touch-action: pan-y; }
+
+  /* Film / Commercial work as tabs: the active one is lit and underlined */
+  .corner.top-right a[href="#film"],
+  .corner.top-right a[href="#commercial"] { padding-bottom: 2px; border-bottom: 1px solid transparent; }
+  body[data-side="film"] .corner.top-right a[href="#film"],
+  body[data-side="commercial"] .corner.top-right a[href="#commercial"] { color: var(--text); border-bottom-color: var(--text); }
+
+  /* The list shows only the active tab's projects */
+  body[data-side="film"] .work-row:not(.is-film),
+  body[data-side="commercial"] .work-row.is-film { display: none; }
   .reel-close { top: 1rem; right: 1rem; }
   body::before { height: 5.5rem; }
 

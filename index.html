@@ -39,12 +39,14 @@
       <!-- Split hero: FILM on the left half of the screen, COMMERCIAL on the right. Only one
            shows at a time, full screen; it switches when the cursor crosses the middle (or with a
            swipe on phones). Visitors land on a random side. Clicking opens that side's reel.
-           Each poster is the reel's first frame, so the switch to the video is seamless. -->
+           Each poster is the reel's first frame, so the switch to the video is seamless.
+           The hero plays light 720p copies (*-bg.mp4); the reel player uses the full-quality files.
+           On phones there's no split: Film / Commercial in the top menu work as tabs. -->
       <div class="hero-side" data-side="film">
-        <video class="hero-featured" src="videos/film-reel.mp4" poster="images/film-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <video class="hero-featured" src="videos/film-reel-bg.mp4" poster="images/film-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
       </div>
       <div class="hero-side" data-side="commercial">
-        <video class="hero-featured" src="videos/commercial-reel.mp4" poster="images/commercial-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <video class="hero-featured" src="videos/commercial-reel-bg.mp4" poster="images/commercial-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
       </div>
       <div class="hero-veil"></div>
 
@@ -60,8 +62,8 @@
       </div>
 
       <div class="corner top-right">
-        <a href="#commercial" data-en="Commercial" data-es="Comercial">Commercial</a>
         <a href="#film">Film</a>
+        <a href="#commercial" data-en="Commercial" data-es="Comercial">Commercial</a>
         <button class="lang-toggle" id="langToggle">ES</button>
       </div>
 
