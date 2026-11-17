@@ -194,7 +194,8 @@ body.scrolled::before { opacity: 1; }
 
 .hero-role {
   font-size: 0.85rem;
-  color: rgba(240,237,232,0.5);
+  color: rgba(240,237,232,0.6);
+  margin-top: -0.2rem;
 }
 
 .corner.top-right a,
@@ -494,6 +495,7 @@ footer {
   .corner.bottom-left  { bottom: 1.25rem; left: 1.25rem; }
   .corner.bottom-right { bottom: 1.25rem; right: 1.25rem; }
   .hero-name { font-size: 1rem; }
+  .hero-role { font-size: 0.75rem; }
   .corner.top-right a,
   .corner.bottom-left a,
   .corner.bottom-right a { font-size: 0.9rem; }
