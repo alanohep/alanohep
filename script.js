@@ -113,18 +113,17 @@ document.querySelectorAll('.work-row').forEach(row => {
 });
 
 // Carousel under the hero: shows only the projects of the side being shown (built from the
-// project list), repeated so the loop always fills the screen. While a subgenre is showing in
-// the hero (or after one is clicked), it shows only that subgenre's projects.
+// project list): the top picks (data-top) of the side being shown, repeated so the loop
+// always fills the screen. It only changes when the visitor switches side.
 let stripKey = '';
 function buildStrip() {
   const track = document.querySelector('.strip-track');
   if (!track) return;
-  const g = genre || document.body.dataset.genre || '';
   const rows = [...document.querySelectorAll('.work-row[data-thumb]')]
     .filter(r => r.classList.contains('is-film') === (side === 'film'))
-    .filter(r => g ? r.dataset.genre === g : r.hasAttribute('data-top')); // top picks (data-top) unless a subgenre is chosen
-  if (!rows.length || stripKey === side + g) return;
-  stripKey = side + g;
+    .filter(r => r.hasAttribute('data-top'));
+  if (!rows.length || stripKey === side) return;
+  stripKey = side;
   const item = r => `<a href="${r.href}" target="_blank" class="strip-item" data-genre="${r.dataset.genre || ''}"><img src="${r.dataset.thumb.replace('images/', 'images/large/')}" alt="" loading="lazy" /></a>`;
   let set = rows.map(item).join('');
   let count = rows.length;
@@ -186,7 +185,6 @@ window.addEventListener('resize', placeGenreLabels);
 function setGenre(next) {
   if (next === genre) return;
   genre = next;
-  buildStrip();
   for (const el of document.querySelectorAll('.genre-labels span')) {
     el.classList.toggle('active', !!next && el.dataset.genre === next);
   }
@@ -252,7 +250,6 @@ heroMain.addEventListener('click', e => {
   if (genre) {
     // A subgenre is showing: go down to the list with only its projects highlighted
     document.body.dataset.genre = genre;
-    buildStrip();
     document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
     return;
   }
