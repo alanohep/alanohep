@@ -39,12 +39,12 @@
       <!-- Split hero: FILM on the left half of the screen, COMMERCIAL on the right. Only one
            shows at a time, full screen; it switches when the cursor crosses the middle (or with a
            swipe on phones). Visitors land on a random side. Clicking opens that side's reel.
-           Until the reels are in videos/, the poster stills show instead. -->
+           Each poster is the reel's first frame, so the switch to the video is seamless. -->
       <div class="hero-side" data-side="film">
-        <video class="hero-featured" src="videos/film-reel.mp4" poster="images/header.jpg" muted loop playsinline preload="auto"></video>
+        <video class="hero-featured" src="videos/film-reel.mp4" poster="images/film-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
       </div>
       <div class="hero-side" data-side="commercial">
-        <video class="hero-featured" src="videos/commercial-reel.mp4" poster="images/commercial-placeholder.jpg" muted loop playsinline preload="auto"></video>
+        <video class="hero-featured" src="videos/commercial-reel.mp4" poster="images/commercial-reel-poster.jpg" muted loop playsinline preload="metadata"></video>
       </div>
       <div class="hero-veil"></div>
 

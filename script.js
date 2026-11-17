@@ -119,6 +119,17 @@ function setSide(next) {
 }
 setSide(Math.random() < 0.5 ? 'film' : 'commercial');
 
+// Load the side the visitor landed on first (it downloads behind the entry game);
+// only once it can play through, fetch the other side's reel.
+(() => {
+  const first  = heroSides[side].querySelector('video');
+  const second = heroSides[side === 'film' ? 'commercial' : 'film'].querySelector('video');
+  first.preload = 'auto';
+  const loadSecond = () => { second.preload = 'auto'; }; // upgrading preload resumes the download
+  if (first.readyState >= 4) loadSecond();
+  else first.addEventListener('canplaythrough', loadSecond, { once: true });
+})();
+
 heroMain.addEventListener('mousemove', e => setSide(e.clientX < window.innerWidth / 2 ? 'film' : 'commercial'));
 
 // Top menu: Commercial / Film also switch the hero side (and still scroll to the list)
